@@ -53,17 +53,31 @@
         </ListView>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
-                <Button Content="Speech"/>
-                <Button x:Name="BoldButton"
-                        Click="BoldButton_Click">
+                <Button x:Name="SpeechButton"
+                        Content="Speech"
+                        Click="SpeechButton_Click"/>
+                <ToggleButton x:Name="BoldButton"
+                              Click="BoldButton_Click">
                     <TextBlock Text="B"
                                FontWeight="Bold"/>
-                </Button>
+                </ToggleButton>
+                <ComboBox x:Name="fontFamilyComboBox"
+                          Width="100"
+                          SelectionChanged="fontFamilyComboBox_SelectionChanged">
+                    
+                </ComboBox>
+                <ComboBox x:Name="fontSizeComboBox"
+                          Width="50"
+                          IsEditable="True"
+                          TextBoxBase.TextChanged="fontSizeComboBox_TextChanged">
+                    
+                </ComboBox>
             </ToolBar>
         </ToolBarTray>
         <Grid>
             <RichTextBox x:Name="contentRichTextBox"
-                         TextChanged="contentRichTextBox_TextChanged"/>
+                         TextChanged="contentRichTextBox_TextChanged"
+                         SelectionChanged="contentRichTextBox_SelectionChanged"/>
 
         </Grid>
 

@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:NoteApplication"
              StartupUri="View/NotesWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock" x:Key="registerStyle">
+            <Setter Property="Text" Value="Register"/>
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="loginStyle">
+            <Setter Property="Text" Value="Login"/>
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
     </Application.Resources>
 </Application>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoteApplication.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,14 @@ using System.Windows.Input;
 
 namespace NoteApplication.ViewModel.Commands
 {
-    class LoginCommand : ICommand
+    public class LoginCommand : ICommand
     {
         public LoginViewModel LVM { get; set; }
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public LoginCommand(LoginViewModel lvm)
         {
@@ -18,12 +23,20 @@ namespace NoteApplication.ViewModel.Commands
         }
         public bool CanExecute(object parameter)
         {
+            User user = parameter as User;
+
+            if (user == null)
+                return false;
+            if (string.IsNullOrEmpty(user.Username))
+                return false;
+            if (string.IsNullOrEmpty(user.Password))
+                return false;
             return true;
         }
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            LVM.LoginAsync();
         }
     }
 }

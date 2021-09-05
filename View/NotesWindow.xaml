@@ -122,13 +122,15 @@
                 </ToggleButton>
                 <ComboBox x:Name="fontFamilyComboBox"
                           Width="100"
-                          SelectionChanged="fontFamilyComboBox_SelectionChanged">
+                          SelectionChanged="fontFamilyComboBox_SelectionChanged"
+                          Text="{Binding LastUsedFont}">
                     
                 </ComboBox>
                 <ComboBox x:Name="fontSizeComboBox"
                           Width="50"
                           IsEditable="True"
-                          TextBoxBase.TextChanged="fontSizeComboBox_TextChanged">
+                          TextBoxBase.TextChanged="fontSizeComboBox_TextChanged"
+                          Text="{Binding LastUsedFontSize}">
                     
                 </ComboBox>
                 <Button x:Name="SaveButton"

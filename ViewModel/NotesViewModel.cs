@@ -1,4 +1,6 @@
-﻿using NoteApplication.Model;
+﻿using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
+using NoteApplication.Model;
 using NoteApplication.ViewModel.Commands;
 using NoteApplication.ViewModel.Helpers;
 using System;
@@ -12,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Media;
 using Xceed.Wpf.Toolkit;
 
 namespace NoteApplication.ViewModel
@@ -79,7 +82,7 @@ namespace NoteApplication.ViewModel
             {
                 selectedNotebook = value;
                 OnPropertyChanged("selectedNotebook");
-                GetNotes();
+                GetNotesAsync();
             }
         }
 
@@ -94,6 +97,24 @@ namespace NoteApplication.ViewModel
                 SelectedNoteChanged?.Invoke(this, new EventArgs());
             }
         }
+
+        private FontFamily lastUsedFont;
+
+        public FontFamily LastUsedFont
+        {
+            get { return lastUsedFont; }
+            set { lastUsedFont = value; }
+        }
+
+        private Double lastUsedFontSize;
+
+        public Double LastUsedFontSize
+        {
+            get { return lastUsedFontSize; }
+            set { lastUsedFontSize = value; }
+        }
+
+
 
 
         public BoldCommand BoldCommand { get; set; }
@@ -116,21 +137,24 @@ namespace NoteApplication.ViewModel
             Notes = new();
             NotebookRenameVisibility = Visibility.Collapsed;
             NoteRenameVisibility = Visibility.Collapsed;
+            LastUsedFont = new("Calibri");
+            LastUsedFontSize = 12;
 
-            GetNotebooks();
+            GetNotebooksAsync();
         }
-        public void CreateNotebook()
+        public async Task CreateNotebookAsync()
         {
             Notebook newNotebook = new()
             {
-                Name = "New notebook"
+                Name = "New notebook",
+                UserId = App.userID
             };
-            DataBaseHelper.Insert(newNotebook);
+            await DataBaseHelper.InsertAsync(newNotebook);
 
-            GetNotebooks();
+            GetNotebooksAsync();
         }
 
-        public void CreateNote(int notebookID)
+        public async Task CreateNoteAsync(string notebookID)
         {
             Note newNote = new()
             {
@@ -140,14 +164,14 @@ namespace NoteApplication.ViewModel
                 Title = $"New note{DateTime.Now}"
        
             };
-            DataBaseHelper.Insert(newNote);
+            await DataBaseHelper.InsertAsync(newNote);
 
-            GetNotes();
+            GetNotesAsync();
         }
 
-        private void GetNotebooks()
+        public async Task GetNotebooksAsync()
         {
-            var notebooks =  DataBaseHelper.Read<Notebook>();
+            var notebooks =  ( await DataBaseHelper.ReadAsync<Notebook>()).Where(n => n.UserId == App.userID).ToList();
             Notebooks.Clear();
             foreach(var notebook in notebooks)
             {
@@ -155,11 +179,11 @@ namespace NoteApplication.ViewModel
             }
         }
 
-        private void GetNotes()
+        private async Task GetNotesAsync()
         {
             if (selectedNotebook != null)
             {
-                var notes = DataBaseHelper.Read<Note>().Where(n => n.NotebookId == selectedNotebook.Id).ToList();
+                var notes = (await DataBaseHelper.ReadAsync<Note>()).Where(n => n.NotebookId == selectedNotebook.Id).ToList();
                 Notes.Clear();
                 foreach (var note in notes)
                 {
@@ -192,8 +216,8 @@ namespace NoteApplication.ViewModel
         public void StopEditingRenameNotebook(Notebook notebook)
         {
             NotebookRenameVisibility = Visibility.Collapsed;
-            DataBaseHelper.Update(notebook);
-            GetNotebooks();
+            DataBaseHelper.UpdateAsync(notebook);
+            GetNotebooksAsync();
         }
         public void StartEditingRenameNote(Note note)
         {
@@ -206,8 +230,40 @@ namespace NoteApplication.ViewModel
         public void StopEditingRenameNote(Note note)
         {
             NoteRenameVisibility = Visibility.Collapsed;
-            DataBaseHelper.Update(note);
-            GetNotes();
+            DataBaseHelper.UpdateAsync(note);
+            GetNotesAsync();
+        }
+
+        public async Task<Paragraph> SpeechToTextAsync()
+        {
+            string region = "westeurope";
+            string key = "fd546a023180466a9f117f7bd812eb25";
+
+            var speechConfig = SpeechConfig.FromSubscription(key, region);
+            using (var audioConfig = AudioConfig.FromDefaultMicrophoneInput())
+            {
+                using (var recognizer = new SpeechRecognizer(speechConfig, audioConfig))
+                {
+                    var result = await recognizer.RecognizeOnceAsync();
+                    var newParagraph = new Paragraph(new Run(result.Text));
+                    newParagraph = ChangeFont(newParagraph);
+                    if (LastUsedFontSize == 0)
+                        LastUsedFontSize = 12;
+                    newParagraph.FontSize = LastUsedFontSize;
+                    return newParagraph;
+                }
+            }
+        }
+
+        private Paragraph ChangeFont(Paragraph Paragraph)
+        {
+            if(Paragraph == null)
+                Paragraph = new();
+            if(LastUsedFont == null)
+                LastUsedFont = new FontFamily("Calibri");
+            Paragraph.FontFamily = LastUsedFont;
+            OnPropertyChanged("lastUsedFont");
+            return Paragraph;
         }
     }
 }

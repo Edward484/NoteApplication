@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace NoteApplication.Model
 {
-    public class Notebook
+    public class Notebook:HasId
     {
-        [PrimaryKey,AutoIncrement]
-        public int Id { set; get; }
-        [Indexed]
-        public int UserId { set; get; }
+        public string Id { set; get; }
+        public string UserId { set; get; }
         public string Name { set; get; }
     }
 }

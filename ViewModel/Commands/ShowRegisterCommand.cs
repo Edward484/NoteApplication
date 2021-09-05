@@ -7,24 +7,23 @@ using System.Windows.Input;
 
 namespace NoteApplication.ViewModel.Commands
 {
-    public class NewNotebookCommand : ICommand
+    public class ShowRegisterCommand : ICommand
     {
-
-        public NotesViewModel NVM { get; set; }
         public event EventHandler CanExecuteChanged;
+        public LoginViewModel VM { get; set; }
 
-        public NewNotebookCommand(NotesViewModel nvm)
+        public ShowRegisterCommand(LoginViewModel vm)
         {
-            NVM = nvm;
+            VM = vm;
         }
         public bool CanExecute(object parameter)
         {
-            return true;   
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            NVM.CreateNotebookAsync();
+            VM.SwitchViews();
         }
     }
 }

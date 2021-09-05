@@ -40,7 +40,20 @@ namespace NoteApplication.View
             fontSizeComboBox.ItemsSource = fontSizes;
         }
 
-        
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            if (string.IsNullOrEmpty(App.userID))
+            {
+                LoginWindows loginWindow = new();
+                loginWindow.ShowDialog();
+
+                viewModel.GetNotebooksAsync();
+            }
+        }
+
+
 
         private void contentRichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -84,19 +97,9 @@ namespace NoteApplication.View
 
         private async void SpeechButton_Click(object sender, RoutedEventArgs e)
         {
-            string region = "westeurope";
-            string key = "fd546a023180466a9f117f7bd812eb25";
-
-            var speechConfig = SpeechConfig.FromSubscription(key, region);
-            using (var audioConfig = AudioConfig.FromDefaultMicrophoneInput())
-            {
-                using (var recognizer = new SpeechRecognizer(speechConfig,audioConfig))
-                {
-                    var result = await recognizer.RecognizeOnceAsync();
-                    contentRichTextBox.Document.Blocks.Add(new Paragraph(new Run(result.Text)));
-                }
-            }
-
+            Paragraph newParagraph;
+            newParagraph = await viewModel.SpeechToTextAsync();
+            contentRichTextBox.Document.Blocks.Add(newParagraph);
         }
 
         private void contentRichTextBox_SelectionChanged(object sender, RoutedEventArgs e)
@@ -110,7 +113,6 @@ namespace NoteApplication.View
             var selectedDecoration = contentRichTextBox.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
             UnderlineButton.IsChecked = (selectedDecoration != DependencyProperty.UnsetValue) && (selectedDecoration.Equals(TextDecorations.Underline));
 
-
             fontFamilyComboBox.SelectedItem = contentRichTextBox.Selection.GetPropertyValue(Inline.FontFamilyProperty);
             fontSizeComboBox.SelectedItem = (contentRichTextBox.Selection.GetPropertyValue(Inline.FontSizeProperty)).ToString();
         }
@@ -120,24 +122,41 @@ namespace NoteApplication.View
             if(fontFamilyComboBox.SelectedItem != null)
             {
                 contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, fontFamilyComboBox.SelectedItem);
+                viewModel.LastUsedFont = (FontFamily)fontFamilyComboBox.SelectedItem;
             }
 
         }
 
         private void fontSizeComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
+            if (fontSizeComboBox.SelectedItem != null)
+            {
+                contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
+                viewModel.LastUsedFontSize = (double)fontSizeComboBox.SelectedItem;
+            }
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private async Task SaveButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            string rtfFile = System.IO.Path.Combine(Environment.CurrentDirectory, $"{viewModel.SelectedNote.Id}.rtf");
-            viewModel.SelectedNote.FilePath = rtfFile;
-            DataBaseHelper.Update(viewModel.SelectedNote);
+            string fileName = $"{viewModel.SelectedNote.Id}.rtf"
+            string rtfFile = System.IO.Path.Combine(Environment.CurrentDirectory, fileName);
 
-            FileStream fileStream = new(rtfFile, FileMode.Create);
-            var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
-            contents.Save(fileStream, DataFormats.Rtf);
+            using (FileStream fileStream = new(rtfFile, FileMode.Create))
+            {
+                var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
+                contents.Save(fileStream, DataFormats.Rtf);
+            }
+            viewModel.SelectedNote.FilePath = UpdateFile(rtfFile, fileName);
+            await DataBaseHelper.UpdateAsync(viewModel.SelectedNote);
+
+
+        }
+
+        private string UpdateFile(string rtfFilePath, string fileName)
+        {
+            string connectionString = "DefaultEndpointsProtocol=https;AccountName=mynotesapplication;AccountKey=p+mA+BiT9EbAuxEU4964sqM2lI7Ddcskj7+GJMJg7LlzRKL8s9hEPBTyh38IYeCMqqFSGzs/4pDh2KLUAY5pFg==;EndpointSuffix=core.windows.net";
+            string containerName = "mynotes";
+
 
         }
 
@@ -148,9 +167,11 @@ namespace NoteApplication.View
             {
                 if (string.IsNullOrEmpty(viewModel.SelectedNote.FilePath) == false)
                 {
-                    FileStream fileStream = new(viewModel.SelectedNote.FilePath, FileMode.Open);
-                    var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
-                    contents.Load(fileStream, DataFormats.Rtf);
+                    using (FileStream fileStream = new(viewModel.SelectedNote.FilePath, FileMode.Open))
+                    {
+                        var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
+                        contents.Load(fileStream, DataFormats.Rtf);
+                    }
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace NoteApplication.ViewModel.Commands
         public void Execute(object parameter)
         {
             Notebook selectedNotebook = parameter as Notebook;
-            NVM.CreateNote(selectedNotebook.Id);
+            NVM.CreateNoteAsync(selectedNotebook.Id);
         }
 
 

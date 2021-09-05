@@ -1,4 +1,5 @@
-﻿using Microsoft.CognitiveServices.Speech;
+﻿using Azure.Storage.Blobs;
+using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using NoteApplication.ViewModel;
 using NoteApplication.ViewModel.Helpers;
@@ -136,9 +137,9 @@ namespace NoteApplication.View
             }
         }
 
-        private async Task SaveButton_ClickAsync(object sender, RoutedEventArgs e)
+        private async void SaveButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            string fileName = $"{viewModel.SelectedNote.Id}.rtf"
+            string fileName = $"{viewModel.SelectedNote.Id}.rtf";
             string rtfFile = System.IO.Path.Combine(Environment.CurrentDirectory, fileName);
 
             using (FileStream fileStream = new(rtfFile, FileMode.Create))
@@ -146,18 +147,23 @@ namespace NoteApplication.View
                 var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
                 contents.Save(fileStream, DataFormats.Rtf);
             }
-            viewModel.SelectedNote.FilePath = UpdateFile(rtfFile, fileName);
+            viewModel.SelectedNote.FilePath = await UpdateFileAsync(rtfFile, fileName);
             await DataBaseHelper.UpdateAsync(viewModel.SelectedNote);
 
 
         }
 
-        private string UpdateFile(string rtfFilePath, string fileName)
+        private async Task<string> UpdateFileAsync(string rtfFilePath, string fileName)
         {
             string connectionString = "DefaultEndpointsProtocol=https;AccountName=mynotesapplication;AccountKey=p+mA+BiT9EbAuxEU4964sqM2lI7Ddcskj7+GJMJg7LlzRKL8s9hEPBTyh38IYeCMqqFSGzs/4pDh2KLUAY5pFg==;EndpointSuffix=core.windows.net";
             string containerName = "mynotes";
 
+            var container = new BlobContainerClient(connectionString, containerName);
+            await container.CreateIfNotExistsAsync();
+            var blob = container.GetBlobClient(fileName);
+            await blob.UploadAsync(rtfFilePath);
 
+            return $"https://mynotesapplication.blob.core.windows.net/mynotes/{fileName}";
         }
 
         private void ViewModel_SelectedNoteChanged(object sender, EventArgs e)

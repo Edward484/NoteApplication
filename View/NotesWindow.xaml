@@ -135,7 +135,7 @@
                 </ComboBox>
                 <Button x:Name="SaveButton"
                         Content="Save"
-                        Click="SaveButton_Click"/>
+                        Click="SaveButton_ClickAsync"/>
             </ToolBar>
         </ToolBarTray>
         <Grid>

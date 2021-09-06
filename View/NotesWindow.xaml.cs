@@ -159,21 +159,24 @@ namespace NoteApplication.View
             string containerName = "mynotes";
 
             var container = new BlobContainerClient(connectionString, containerName);
-            await container.CreateIfNotExistsAsync();
             var blob = container.GetBlobClient(fileName);
             await blob.UploadAsync(rtfFilePath);
 
             return $"https://mynotesapplication.blob.core.windows.net/mynotes/{fileName}";
         }
 
-        private void ViewModel_SelectedNoteChanged(object sender, EventArgs e)
+        private async void ViewModel_SelectedNoteChanged(object sender, EventArgs e)
         {
             contentRichTextBox.Document.Blocks.Clear();
             if (viewModel.SelectedNote != null)
             {
                 if (string.IsNullOrEmpty(viewModel.SelectedNote.FilePath) == false)
                 {
-                    using (FileStream fileStream = new(viewModel.SelectedNote.FilePath, FileMode.Open))
+                    //azure container start
+                    string downloadPath = $"{viewModel.SelectedNote.Id}.rtf";
+                    await new BlobClient(new Uri(viewModel.SelectedNote.FilePath)).DownloadToAsync(downloadPath);
+
+                    using (FileStream fileStream = new(downloadPath, FileMode.Open))
                     {
                         var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
                         contents.Load(fileStream, DataFormats.Rtf);

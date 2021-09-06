@@ -25,6 +25,8 @@ namespace NoteApplication.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler SelectedNoteChanged;
 
+        
+
         public ExitCommand ExitCommand { get; set; }
         public ObservableCollection<Notebook> Notebooks { get; set; }
         public ObservableCollection<Note> Notes { get; set; }
@@ -151,7 +153,7 @@ namespace NoteApplication.ViewModel
             };
             await DataBaseHelper.InsertAsync(newNotebook);
 
-            GetNotebooksAsync();
+            await GetNotebooksAsync();
         }
 
         public async Task CreateNoteAsync(string notebookID)
@@ -166,7 +168,7 @@ namespace NoteApplication.ViewModel
             };
             await DataBaseHelper.InsertAsync(newNote);
 
-            GetNotesAsync();
+            await GetNotesAsync();
         }
 
         public async Task GetNotebooksAsync()
@@ -264,6 +266,17 @@ namespace NoteApplication.ViewModel
             Paragraph.FontFamily = LastUsedFont;
             OnPropertyChanged("lastUsedFont");
             return Paragraph;
+        }
+
+        internal void DeleteNotebook(Notebook notebook)
+        {
+            string fileName = $"{notebook.Id}.id";
+            string filePath = System.IO.Path.Combine(Environment.CurrentDirectory, fileName);
+        }
+
+        internal void DeleteNotebook(Note note)
+        {
+            throw new NotImplementedException();
         }
     }
 }

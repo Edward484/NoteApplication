@@ -70,6 +70,8 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
+            <TextBlock x:Name="textBlock" Visibility="Collapsed">
+            </TextBlock>
             <Button x:Name="GotoRegister"
                     Command="{Binding ShowRegisterCommand}"
                     Content="Register"

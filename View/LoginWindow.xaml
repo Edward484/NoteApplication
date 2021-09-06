@@ -7,35 +7,80 @@
         xmlns:local="clr-namespace:NoteApplication.View"
         xmlns:vm="clr-namespace:NoteApplication.ViewModel"
         mc:Ignorable="d"
-        Title="LoginWindows" Height="300" Width="300">
+        Title="LoginWindows" Height="320" Width="320">
     <Window.Resources>
         <ResourceDictionary>
             <vm:LoginViewModel x:Key="vm"/>
+            <Storyboard x:Key="MoveUp">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="22"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="4.4000021999999994"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Opacity)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="155"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="255"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Height)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="20"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="25"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
         </ResourceDictionary>
     </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource MoveUp}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="GoToLogin">
+            <BeginStoryboard Storyboard="{StaticResource MoveUp}"/>
+        </EventTrigger>
+
+    </Window.Triggers>
     <Grid DataContext="{StaticResource vm}">
         <StackPanel Visibility="{Binding LoginVisibility}"
-                    Margin="10">
+                    Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Email: "/>
             <TextBox Text="{Binding Username, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Password: "/>
             <TextBox Text="{Binding Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Command="{Binding LoginCommand}"
+            <Button x:Name="button" Command="{Binding LoginCommand}"
                     CommandParameter="{Binding User}"
                     Content="Login"
-                    Margin="10,5"/>
-            <TextBlock Style="{StaticResource registerStyle}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding ShowRegisterCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                
-            </TextBlock>
+                    Margin="10,5" RenderTransformOrigin="0.5,0.5" Width="255" Height="25">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="GotoRegister"
+                    Command="{Binding ShowRegisterCommand}"
+                    Content="Register"
+                    Width="50" 
+                    HorizontalAlignment="Left">
+
+            </Button>
         </StackPanel>
 
         <StackPanel Visibility="{Binding RegisterVisibility}"
-                    Margin="10,0">
+                    Margin="10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <TextBlock Text="First Name: "/>
             <TextBox Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Last Name: "/>
@@ -50,14 +95,12 @@
                     CommandParameter="{Binding User}"
                     Content="Register"
                     Margin="10,5"/>
-            <TextBlock Style="{StaticResource loginStyle}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding ShowRegisterCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-
-            </TextBlock>
+            <Button x:Name="GoToLogin"
+                    Command="{Binding ShowRegisterCommand}"
+                    Content="Login"
+                    Width="50" 
+                    HorizontalAlignment="Left">
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

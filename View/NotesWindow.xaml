@@ -17,7 +17,7 @@
         <vm:TextEditorViewModel x:Key="tvm"/>
         <help:DataBaseHelper x:Key="help"/>
     </Window.Resources>
-    
+
     <DockPanel DataContext="{StaticResource vm}">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -41,7 +41,7 @@
         <ListView DockPanel.Dock="Left"
                   Background="MidnightBlue"
                   Width="200"
-                  SelectedValue="{Binding SelectedNotebook,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notebooks}">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -50,17 +50,17 @@
                             <uc:DisplayNotebook.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Rename notebook"
-                                              Command="{Binding Source={StaticResource vm},Path=RenameEditCommandNotebook}"
+                                              Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
                                               CommandParameter="{Binding}"/>
                                 </ContextMenu>
                             </uc:DisplayNotebook.ContextMenu>
                         </uc:DisplayNotebook>
                         <TextBox    x:Name="RenameNotebookTextBox" 
-                                    Text="{Binding Name,Mode=TwoWay}"
-                                    Visibility="{Binding Source={StaticResource vm}, Path=NotebookRenameVisibility}">
+                                    Text="{Binding Name, Mode=TwoWay}"
+                                    Visibility="{Binding NotebookRenameVisibility, Source={StaticResource vm}}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus">
-                                    <i:InvokeCommandAction Command="{Binding Source={StaticResource vm}, Path=RenameEndEditCommandNotebook}"
+                                    <i:InvokeCommandAction Command="{Binding RenameEndEditCommandNotebook, Source={StaticResource vm}}"
                                                            CommandParameter="{Binding}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
@@ -68,30 +68,30 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
+
         </ListView>
         <ListView DockPanel.Dock="Left"
                   Width="200"
-                  SelectedValue="{Binding SelectedNote,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notes}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                        <Grid>
+                    <Grid>
                         <uc:DisplayNote NoteDep="{Binding}">
                             <uc:DisplayNote.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Rename note"
-                                              Command="{Binding Source={StaticResource vm}, Path=RenameEditCommandNote}"
+                                              Command="{Binding RenameEditCommandNote, Source={StaticResource vm}}"
                                               CommandParameter="{Binding}"/>
                                 </ContextMenu>
                             </uc:DisplayNote.ContextMenu>
                         </uc:DisplayNote>
                         <TextBox x:Name="RenameNoteTextBox"
                                  Text="{Binding Title, Mode=TwoWay}"
-                                 Visibility="{Binding Source={StaticResource vm}, Path=NoteRenameVisibility}">
+                                 Visibility="{Binding NoteRenameVisibility, Source={StaticResource vm}}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus">
-                                    <i:InvokeCommandAction Command="{Binding Source={StaticResource vm}, Path=RenameEndEditCommandNote}"
+                                    <i:InvokeCommandAction Command="{Binding RenameEndEditCommandNote, Source={StaticResource vm}}"
                                                            CommandParameter="{Binding}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
@@ -123,16 +123,12 @@
                 <ComboBox x:Name="fontFamilyComboBox"
                           Width="100"
                           SelectionChanged="fontFamilyComboBox_SelectionChanged"
-                          Text="{Binding LastUsedFont}">
-                    
-                </ComboBox>
+                          Text="{Binding LastUsedFont}"/>
                 <ComboBox x:Name="fontSizeComboBox"
                           Width="50"
                           IsEditable="True"
                           TextBoxBase.TextChanged="fontSizeComboBox_TextChanged"
-                          Text="{Binding LastUsedFontSize}">
-                    
-                </ComboBox>
+                          Text="{Binding LastUsedFontSize}"/>
                 <Button x:Name="SaveButton"
                         Content="Save"
                         Click="SaveButton_ClickAsync"/>

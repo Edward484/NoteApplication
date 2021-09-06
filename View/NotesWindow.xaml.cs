@@ -147,20 +147,28 @@ namespace NoteApplication.View
                 var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
                 contents.Save(fileStream, DataFormats.Rtf);
             }
-            viewModel.SelectedNote.FilePath = await UpdateFileAsync(rtfFile, fileName);
+            try
+            {
+                viewModel.SelectedNote.FilePath = await UpdateFileAsync(rtfFile, fileName);
+            }
+            catch(Azure.RequestFailedException)
+            {
+                viewModel.SelectedNote.FilePath = await UpdateFileAsync(rtfFile, fileName,true);
+
+            }
             await DataBaseHelper.UpdateAsync(viewModel.SelectedNote);
 
 
         }
 
-        private async Task<string> UpdateFileAsync(string rtfFilePath, string fileName)
+        private async Task<string> UpdateFileAsync(string rtfFilePath, string fileName, bool overwrite1 = false)
         {
             string connectionString = "DefaultEndpointsProtocol=https;AccountName=mynotesapplication;AccountKey=p+mA+BiT9EbAuxEU4964sqM2lI7Ddcskj7+GJMJg7LlzRKL8s9hEPBTyh38IYeCMqqFSGzs/4pDh2KLUAY5pFg==;EndpointSuffix=core.windows.net";
             string containerName = "mynotes";
 
             var container = new BlobContainerClient(connectionString, containerName);
             var blob = container.GetBlobClient(fileName);
-            await blob.UploadAsync(rtfFilePath);
+            await blob.UploadAsync(rtfFilePath, overwrite : overwrite1);
 
             return $"https://mynotesapplication.blob.core.windows.net/mynotes/{fileName}";
         }

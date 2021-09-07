@@ -12,6 +12,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <vm:LoginViewModel x:Key="vm"/>
+            <vm:NotesViewModel x:Key="nvm"/>
             <Storyboard x:Key="MoveUp">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                     <EasingDoubleKeyFrame KeyTime="00:00:00" Value="22"/>
@@ -113,15 +114,25 @@
         <StackPanel Visibility="{Binding RegisterVisibility}"
                     Margin="10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <TextBlock Text="First Name: "/>
-            <TextBox Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="FirstNameTextBox"
+                     Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown="FirstNameTextBox_KeyDown"/>
             <TextBlock Text="Last Name: "/>
-            <TextBox Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="LastNameTextBox"
+                     Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown="LastNameTextBox_KeyDown"/>
             <TextBlock Text="Email: "/>
-            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="UsernameTextBoxR"
+                     Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown="UsernameTextBoxR_KeyDown"/>
             <TextBlock Text="Password: "/>
-            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="PasswordTextBoxR"
+                     Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown="PasswordTextBoxR_KeyDown"/>
             <TextBlock Text="Confirm password: "/>
-            <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="ConfirmPasswordTextBoxR"
+                     Text="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown="ConfirmPasswordTextBoxR_KeyDown"/>
             <Button Command="{Binding RegisterCommand}"
                     CommandParameter="{Binding User}"
                     Content="Register"
@@ -133,5 +144,14 @@
                     HorizontalAlignment="Left">
             </Button>
         </StackPanel>
+        <Button
+            x:Name="QuitFormButton"
+            Content="Quit form" 
+            Width="60" 
+            Height="20" 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Right" 
+            Margin="20,20,20,20"
+            Command="{Binding ExitCommand , Source={StaticResource nvm}}"/>
     </Grid>
 </Window>

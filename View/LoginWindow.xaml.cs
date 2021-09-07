@@ -34,11 +34,6 @@ namespace NoteApplication.View
             Close();
         }
 
-        private void StackPanel_KeyDown(object sender, KeyEventArgs e)      
-        {
-            
-        }
-
         private void UsernameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -52,6 +47,48 @@ namespace NoteApplication.View
             if (e.Key == Key.Enter)
             {
                 vm.LoginAsync();
+            }
+        }
+
+        
+
+        private void FirstNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LastNameTextBox.Focus();
+            }
+        }
+
+        private void LastNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                UsernameTextBoxR.Focus();
+            }
+        }
+
+        private void UsernameTextBoxR_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PasswordTextBoxR.Focus();
+            }
+        }
+
+        private void PasswordTextBoxR_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ConfirmPasswordTextBoxR.Focus();
+            }
+        }
+
+        private void ConfirmPasswordTextBoxR_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                vm.RegisterAsync();
             }
         }
     }

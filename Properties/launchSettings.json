@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "NoteApplication": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "userID": "Value",
+        "App.userID": "Value"
+      }
+    }
+  }
+}

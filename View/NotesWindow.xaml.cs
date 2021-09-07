@@ -49,6 +49,7 @@ namespace NoteApplication.View
             {
                 LoginWindows loginWindow = new();
                 loginWindow.ShowDialog();
+                
 
                 viewModel.GetNotebooksAsync();
             }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace NoteApplication.ViewModel
 {
@@ -32,6 +33,7 @@ namespace NoteApplication.ViewModel
         public RegisterCommand RegisterCommand { get; set; }
         public LoginCommand LoginCommand { get; set; }
         public ShowRegisterCommand ShowRegisterCommand { get; set; }
+        public ChangeFocusRegisterCommand ChangeFocusRegisterCommand { get; set; }
 
         private Visibility loginVisibility;
         public Visibility LoginVisibility
@@ -158,6 +160,50 @@ namespace NoteApplication.ViewModel
             }
         }
 
+        private TextBox usernameTextBox;
+
+        public TextBox UsernameTextBox
+        {
+            get { return usernameTextBox; }
+            set 
+            { 
+                usernameTextBox = value;
+            }
+        }
+
+        private TextBox passwordTextBox;
+
+        public TextBox PasswordTextBox
+        {
+            get { return passwordTextBox; }
+            set 
+            { 
+                passwordTextBox = value;
+            }
+        }
+        private TextBox lastNameTB;
+
+        public TextBox LastNameTB
+        {
+            get { return lastNameTB; }
+            set { lastNameTB = value; }
+        }
+
+        private TextBox firstNameTB;
+
+        public TextBox FirstNameTB
+        {
+            get { return firstNameTB; }
+            set 
+            { 
+                firstNameTB = value; 
+            }
+        }
+
+
+
+
+
 
         public LoginViewModel()
         {
@@ -167,6 +213,7 @@ namespace NoteApplication.ViewModel
             RegisterCommand = new(this);
             LoginCommand = new(this);
             ShowRegisterCommand = new(this);
+            ChangeFocusRegisterCommand = new(this);
 
             User = new();
         }
@@ -205,10 +252,18 @@ namespace NoteApplication.ViewModel
                 Authenticated?.Invoke(this, new EventArgs());
             }
         }
+
+        internal void ChangeFocus(TextBox textbox)
+        {
+            
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
 
     }
 }

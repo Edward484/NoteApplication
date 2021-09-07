@@ -5,13 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NoteApplication.View.UserControls"
              mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:NoteApplication.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="100" d:DesignWidth="200">
+
+    <UserControl.Resources>
+        <vm:NotesViewModel x:Key="vm"/>
+    </UserControl.Resources>
     <StackPanel>
         <TextBlock Text="{Binding Name}"
                    Foreground="White"
                    Margin="15"
                    FontSize="20"
                    FontWeight="bold"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center">
+        </TextBlock>
+        <TextBox    x:Name="RenameNotebookTextBox" 
+                    Text="{Binding Name, Mode=TwoWay, Source={StaticResource vm}}"
+                    Visibility="{Binding NotebookRenameVisibility, Source={StaticResource vm}}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding RenameEndEditCommandNotebook, Source={StaticResource vm}}"
+                                           CommandParameter="{Binding SelectedNotebook ,Source={StaticResource vm}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
     </StackPanel>
 </UserControl>

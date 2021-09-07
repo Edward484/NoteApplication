@@ -222,11 +222,11 @@ namespace NoteApplication.ViewModel
             }
             
         }
-        public void StopEditingRenameNotebook(Notebook notebook)
+        public async Task StopEditingRenameNotebookAsync(Notebook notebook)
         {
             NotebookRenameVisibility = Visibility.Collapsed;
-            DataBaseHelper.UpdateAsync(notebook);
-            GetNotebooksAsync();
+            await DataBaseHelper.UpdateAsync(notebook);
+            await GetNotebooksAsync();
         }
         public void StartEditingRenameNote(Note note)
         {

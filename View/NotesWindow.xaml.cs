@@ -24,7 +24,7 @@ namespace NoteApplication.View
     /// <summary>
     /// Interaction logic for NotesWindow.xaml
     /// </summary>
-    public partial class NotesWindow : Window
+    public partial class NotesWindow : Window 
     {
         NotesViewModel viewModel; 
         public NotesWindow()

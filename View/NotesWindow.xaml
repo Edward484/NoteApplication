@@ -52,23 +52,13 @@
                                 <ContextMenu>
                                     <MenuItem Header="Rename notebook"
                                               Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
+                                              CommandParameter="{Binding SelectedNotebook, Source={StaticResource vm}}"/>
                                     <MenuItem Header="Delete notebook"
                                               Command="{Binding DeleteCommandNotebook, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
+                                              CommandParameter="{Binding SelectedNotebook, Source={StaticResource vm}}"/>
                                 </ContextMenu>
                             </uc:DisplayNotebook.ContextMenu>
                         </uc:DisplayNotebook>
-                        <TextBox    x:Name="RenameNotebookTextBox" 
-                                    Text="{Binding Name, Mode=TwoWay}"
-                                    Visibility="{Binding NotebookRenameVisibility, Source={StaticResource vm}}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="LostFocus">
-                                    <i:InvokeCommandAction Command="{Binding RenameEndEditCommandNotebook, Source={StaticResource vm}}"
-                                                           CommandParameter="{Binding}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

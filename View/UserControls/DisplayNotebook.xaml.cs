@@ -19,7 +19,7 @@ namespace NoteApplication.View.UserControls
     /// <summary>
     /// Interaction logic for DisplayNotebook.xaml
     /// </summary>
-    public partial class DisplayNotebook : UserControl
+    public partial class DisplayNotebook : UserControl 
     {
 
 
@@ -28,6 +28,8 @@ namespace NoteApplication.View.UserControls
             get { return (Notebook)GetValue(NotebookProperty); }
             set { SetValue(NotebookProperty, value); }
         }
+
+        
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NotebookProperty =
@@ -40,6 +42,21 @@ namespace NoteApplication.View.UserControls
             {
                 notebookUserControl.DataContext = notebookUserControl.NotebookDep;
             }
+        }
+
+        public Visibility Visible
+        {
+            get { return (Visibility)GetValue(VisibleProperty); }
+            set { SetValue(VisibleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VisibleProperty =
+            DependencyProperty.Register("Visible", typeof(Visibility), typeof(DisplayNotebook), new PropertyMetadata(Visibility.Collapsed, SetVisible));
+
+        private static void SetVisible(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
         }
 
         public DisplayNotebook()

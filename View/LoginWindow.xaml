@@ -80,9 +80,15 @@
         <StackPanel Visibility="{Binding LoginVisibility}"
                     Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Email: " RenderTransformOrigin="0.501,0.603" Foreground="Black"/>
-            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,3,0,10"/>
+            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,3,0,10"
+                     x:Name="UsernameTextBox"
+                     KeyDown="UsernameTextBox_KeyDown"/>
             <TextBlock Text="Password: "/>
-            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,3,0,10"/>
+            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,3,0,10"
+                     x:Name="PasswordTextBox"
+                     KeyDown="PasswordTextBox_KeyDown"/>
             <Button x:Name="button" Command="{Binding LoginCommand}"
                     CommandParameter="{Binding User}"
                     Content="Login"

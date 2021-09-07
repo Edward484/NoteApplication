@@ -33,5 +33,26 @@ namespace NoteApplication.View
         {
             Close();
         }
+
+        private void StackPanel_KeyDown(object sender, KeyEventArgs e)      
+        {
+            
+        }
+
+        private void UsernameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PasswordTextBox.Focus();
+            }
+        }
+
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                vm.LoginAsync();
+            }
+        }
     }
 }

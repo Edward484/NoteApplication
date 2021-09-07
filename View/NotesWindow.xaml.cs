@@ -180,9 +180,10 @@ namespace NoteApplication.View
             {
                 if (string.IsNullOrEmpty(viewModel.SelectedNote.FilePath) == false)
                 {
-                    //azure container start
+                    //azure download note from container start
                     string downloadPath = $"{viewModel.SelectedNote.Id}.rtf";
                     await new BlobClient(new Uri(viewModel.SelectedNote.FilePath)).DownloadToAsync(downloadPath);
+                    //azure download note from container end
 
                     using (FileStream fileStream = new(downloadPath, FileMode.Open))
                     {

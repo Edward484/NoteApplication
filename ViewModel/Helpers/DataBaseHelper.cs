@@ -57,9 +57,14 @@ namespace NoteApplication.ViewModel.Helpers
 
         public static async Task<bool> DeleteAsync<T>(T item) where T: HasId
         {
+
+            var body = JsonConvert.SerializeObject(item);
+            var content = new StringContent(body, Encoding.UTF8, "application/json");
+
             using (HttpClient client = new())
             {
-                var result = await client.DeleteAsync($"{dataBasePath}{item.GetType().Name.ToLower()}.json");
+                var sender = $"{dataBasePath}{item.GetType().Name.ToLower()}/{item.Id}.json";
+                var result = await client.DeleteAsync(sender);
                 if (result.IsSuccessStatusCode)
                 {
                     return true;
@@ -83,10 +88,13 @@ namespace NoteApplication.ViewModel.Helpers
                 {
                     var objects = JsonConvert.DeserializeObject<Dictionary<string,T>>(jsonResult);
                     List<T> list = new();
-                    foreach (var obj in objects)
+                    if (objects != null)
                     {
-                        obj.Value.Id = obj.Key;
-                        list.Add(obj.Value);
+                        foreach (var obj in objects)
+                        {
+                            obj.Value.Id = obj.Key;
+                            list.Add(obj.Value);
+                        }
                     }
                     return list;
                 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.CognitiveServices.Speech;
+﻿using Azure.Storage.Blobs;
+using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using NoteApplication.Model;
 using NoteApplication.ViewModel.Commands;
@@ -16,6 +17,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Media;
 using Xceed.Wpf.Toolkit;
+using Microsoft.WindowsAzure.MobileServices;
+using System.IO;
 
 namespace NoteApplication.ViewModel
 {
@@ -37,7 +40,8 @@ namespace NoteApplication.ViewModel
         public RenameEndEditCommandNotebook RenameEndEditCommandNotebook { get; set; }
 
         public RenameEditCommandNote RenameEditCommandNote { get; set; }
-
+        public DeleteCommandNote DeleteCommandNote { get;  set; }
+        public DeleteCommandNotebook DeleteCommandNotebook { get; set; }
         public RenameEndEditCommandNote RenameEndEditCommandNote { get; set; }
         public ToggleButton BoldButton { get; set; }
 
@@ -134,6 +138,8 @@ namespace NoteApplication.ViewModel
             RenameEndEditCommandNotebook = new(this);
             RenameEndEditCommandNote = new(this);
             RenameEditCommandNote = new(this);
+            DeleteCommandNote = new(this);
+            DeleteCommandNotebook = new(this);
 
             Notebooks = new();
             Notes = new();
@@ -174,6 +180,7 @@ namespace NoteApplication.ViewModel
         public async Task GetNotebooksAsync()
         {
             var notebooks =  ( await DataBaseHelper.ReadAsync<Notebook>()).Where(n => n.UserId == App.userID).ToList();
+
             Notebooks.Clear();
             foreach(var notebook in notebooks)
             {
@@ -268,15 +275,37 @@ namespace NoteApplication.ViewModel
             return Paragraph;
         }
 
-        internal void DeleteNotebook(Notebook notebook)
+        internal async Task DeleteNotebookAsync(Notebook notebook)
         {
-            string fileName = $"{notebook.Id}.id";
-            string filePath = System.IO.Path.Combine(Environment.CurrentDirectory, fileName);
+            for(int i = 0; i < Notes.Count();)
+            {
+                await DeleteNoteAsync(Notes[i]);
+            }
+            var result = await DataBaseHelper.DeleteAsync<Notebook>(notebook);
+            Notebooks.Remove(notebook);
+            await GetNotebooksAsync();
         }
 
-        internal void DeleteNotebook(Note note)
-        {
-            throw new NotImplementedException();
+        internal async Task DeleteNoteAsync(Note note)
+        {          
+            //delete content from blob Azure
+            string connectionString = "DefaultEndpointsProtocol=https;AccountName=mynotesapplication;AccountKey=p+mA+BiT9EbAuxEU4964sqM2lI7Ddcskj7+GJMJg7LlzRKL8s9hEPBTyh38IYeCMqqFSGzs/4pDh2KLUAY5pFg==;EndpointSuffix=core.windows.net";
+            string containerName = "mynotes";
+            string downloadPath = $"{note.Id}.rtf";
+            var blobContainer = new BlobContainerClient(connectionString, containerName);
+            var blob = blobContainer.GetBlobClient(downloadPath);
+            await blob.DeleteIfExistsAsync();
+
+            //remove from list of notes
+            Notes.Remove(note);
+
+            //remove from firebase
+            var result = (await DataBaseHelper.DeleteAsync<Note>(note));
+
+            //remove from local directory
+            File.Delete(System.IO.Path.Combine(Environment.CurrentDirectory,downloadPath));
+            await GetNotesAsync();
+
         }
     }
 }

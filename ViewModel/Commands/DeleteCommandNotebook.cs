@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace NoteApplication.ViewModel.Commands
 {
-    class DeleteCommandNotebook : ICommand
+    public class DeleteCommandNotebook : ICommand
     {
         public NotesViewModel VM { get; set; }
 
@@ -25,13 +25,20 @@ namespace NoteApplication.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            if(VM.Notes.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void Execute(object parameter)
         {
             Notebook notebook = parameter as Notebook;
-            VM.DeleteNotebook(notebook);
+            VM.DeleteNotebookAsync(notebook);
         }
     }
 }

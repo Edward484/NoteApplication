@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace NoteApplication.ViewModel.Commands
 {
-    class DeleteCommandNote : ICommand
+    public class DeleteCommandNote : ICommand
     {
         public event EventHandler CanExecuteChanged
         {
@@ -16,7 +16,7 @@ namespace NoteApplication.ViewModel.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        NotesViewModel VM;
+        public NotesViewModel VM { get; set; }
 
         public DeleteCommandNote(NotesViewModel vm)
         {
@@ -31,7 +31,7 @@ namespace NoteApplication.ViewModel.Commands
         public void Execute(object parameter)
         {
             Note note = parameter as Note;
-            VM.DeleteNotebook(note);
+            VM.DeleteNoteAsync(note);
         }
     }
 }

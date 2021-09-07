@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace NoteApplication
 {
@@ -14,5 +16,6 @@ namespace NoteApplication
     public partial class App : Application
     {
         public static string userID = string.Empty;
+        public static MobileServiceClient MobileServiceClient = new("https://mynotesapplication.azurewebsites.net");
     }
 }

@@ -45,6 +45,19 @@ namespace NoteApplication.ViewModel
         public RenameEndEditCommandNote RenameEndEditCommandNote { get; set; }
         public ToggleButton BoldButton { get; set; }
 
+        private Visibility notebookNameVisibility;
+
+        public Visibility NotebookNameVisibility
+        {
+            get { return notebookNameVisibility; }
+            set 
+            { 
+                notebookNameVisibility = value;
+                OnPropertyChanged("NotebookNameVisibility");
+            }
+        }
+
+
         private Visibility notebookRenameVisibility;
 
         public Visibility NotebookRenameVisibility
@@ -208,22 +221,15 @@ namespace NoteApplication.ViewModel
         }
 
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        }
 
         public void StartEditingRenameNotebook(Notebook notebook)
         {
-            if (SelectedNotebook.Id == notebook.Id)
-            {
-                NotebookRenameVisibility = Visibility.Visible;
-            }
-            
+            NotebookNameVisibility = Visibility.Collapsed;
+            NotebookRenameVisibility = Visibility.Visible;
         }
         public void StopEditingRenameNotebook(Notebook notebook)
         {
+            NotebookNameVisibility = Visibility.Visible;
             NotebookRenameVisibility = Visibility.Collapsed;
             DataBaseHelper.UpdateAsync(notebook);
             GetNotebooksAsync();
@@ -305,6 +311,13 @@ namespace NoteApplication.ViewModel
             //remove from local directory
             File.Delete(System.IO.Path.Combine(Environment.CurrentDirectory,downloadPath));
             await GetNotesAsync();
+
+        }
+
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         }
     }

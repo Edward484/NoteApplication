@@ -3,15 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NoteApplication.View.UserControls"
+             xmlns:local="clr-namespace:NoteApplication.View.UserControls" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:vm="clr-namespace:NoteApplication.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="200">
+    <UserControl.Resources>
+        <vm:NotesViewModel x:Key="vm"/>
+    </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="{Binding Name}"
+        <TextBlock Text="{Binding Name,Mode=TwoWay}"
                    Foreground="White"
                    Margin="15"
-                   FontSize="20"
+                   FontSize="16"
                    FontWeight="bold"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"
+                   Visibility="{Binding NotebookNameVisibility, Source={StaticResource vm}}"/>
+        <TextBox    
+            x:Name="RenameNotebookTextBox" 
+            Text="{Binding Name, Mode=TwoWay}"
+            Visibility="{Binding NotebookRenameVisibility, Source={StaticResource vm}}"
+            FontSize="16"
+            VerticalAlignment="Center"
+            Margin="15"
+            Foreground="White" 
+            Background="MidnightBlue" 
+            SelectionOpacity="0" 
+            BorderThickness="0,0,0,0" 
+            HorizontalAlignment="Center"
+            Width="180">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction 
+                        Command="{Binding RenameEndEditCommandNotebook, Source={StaticResource vm}}"
+                        CommandParameter="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
     </StackPanel>
 </UserControl>

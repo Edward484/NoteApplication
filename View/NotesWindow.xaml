@@ -49,10 +49,10 @@
                     <Grid>
                         <uc:DisplayNotebook NotebookDep="{Binding}">
                             <uc:DisplayNotebook.ContextMenu>
-                                <ContextMenu>
+                                <ContextMenu  DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                     <MenuItem Header="Rename notebook"
                                               Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding SelectedNotebook, Source={StaticResource vm}}"/>
+                                              CommandParameter="{Binding SelectedNot, Source={StaticResource vm}, Mode=TwoWay}"/>
                                     <MenuItem Header="Delete notebook"
                                               Command="{Binding DeleteCommandNotebook, Source={StaticResource vm}}"
                                               CommandParameter="{Binding SelectedNotebook, Source={StaticResource vm}}"/>
@@ -76,7 +76,7 @@
                                 <ContextMenu>
                                     <MenuItem Header="Rename note"
                                               Command="{Binding RenameEditCommandNote, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
+                                              CommandParameter="{Binding SelectedNote,  Source={StaticResource vm}, Mode=TwoWay}"/>
                                     <MenuItem Header="Delete note"
                                               Command="{Binding DeleteCommandNote, Source={StaticResource vm}}"
                                               CommandParameter="{Binding}"/>

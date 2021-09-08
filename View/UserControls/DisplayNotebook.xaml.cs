@@ -40,27 +40,14 @@ namespace NoteApplication.View.UserControls
             DisplayNotebook notebookUserControl = d as DisplayNotebook;
             if(notebookUserControl != null)
             {
+
                 notebookUserControl.DataContext = notebookUserControl.NotebookDep;
             }
         }
 
-        public Visibility Visible
-        {
-            get { return (Visibility)GetValue(VisibleProperty); }
-            set { SetValue(VisibleProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty VisibleProperty =
-            DependencyProperty.Register("Visible", typeof(Visibility), typeof(DisplayNotebook), new PropertyMetadata(Visibility.Collapsed, SetVisible));
-
-        private static void SetVisible(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
         public DisplayNotebook()
         {
+            DataContext = this;
             InitializeComponent();
         }
     }

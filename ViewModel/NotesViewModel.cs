@@ -87,7 +87,7 @@ namespace NoteApplication.ViewModel
             set
             {
                 selectedNotebook = value;
-                OnPropertyChanged("selectedNotebook");
+                OnPropertyChanged("SelectedNotebook");
                 GetNotesAsync();
             }
         }
@@ -99,7 +99,7 @@ namespace NoteApplication.ViewModel
             set 
             { 
                 selectedNote = value;
-                OnPropertyChanged("selectedNote");
+                OnPropertyChanged("SelectedNote");
                 SelectedNoteChanged?.Invoke(this, new EventArgs());
             }
         }
@@ -119,6 +119,19 @@ namespace NoteApplication.ViewModel
             get { return lastUsedFontSize; }
             set { lastUsedFontSize = value; }
         }
+
+        private string renameNotebookTextBox;
+
+        public string RenameNotebookTextBox
+        {
+            get { return renameNotebookTextBox; }
+            set 
+            {
+                SelectedNotebook = SelectedNotebook;
+                renameNotebookTextBox = value; 
+            }
+        }
+
 
 
 
@@ -216,11 +229,7 @@ namespace NoteApplication.ViewModel
 
         public void StartEditingRenameNotebook(Notebook notebook)
         {
-            if (SelectedNotebook.Id == notebook.Id)
-            {
-                NotebookRenameVisibility = Visibility.Visible;
-            }
-            
+            NotebookRenameVisibility = Visibility.Visible;   
         }
         public async Task StopEditingRenameNotebookAsync(Notebook notebook)
         {
@@ -230,11 +239,7 @@ namespace NoteApplication.ViewModel
         }
         public void StartEditingRenameNote(Note note)
         {
-            if (SelectedNote.Id == note.Id)
-            {
                 NoteRenameVisibility = Visibility.Visible;
-            }
-
         }
         public void StopEditingRenameNote(Note note)
         {

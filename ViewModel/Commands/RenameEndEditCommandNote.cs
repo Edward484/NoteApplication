@@ -28,7 +28,7 @@ namespace NoteApplication.ViewModel.Commands
         {
             Note note = parameter as Note;
             if (note != null)
-                VM.StopEditingRenameNote(note);
+                VM.StopEditingRenameNoteAsync(note);
         }
     }
 }

@@ -84,16 +84,6 @@
                                 </ContextMenu>
                             </uc:DisplayNote.ContextMenu>
                         </uc:DisplayNote>
-                        <TextBox x:Name="RenameNoteTextBox"
-                                 Text="{Binding Title, Mode=TwoWay}"
-                                 Visibility="{Binding NoteRenameVisibility, Source={StaticResource vm}}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="LostFocus">
-                                    <i:InvokeCommandAction Command="{Binding RenameEndEditCommandNote, Source={StaticResource vm}}"
-                                                           CommandParameter="{Binding}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

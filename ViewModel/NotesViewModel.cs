@@ -82,6 +82,32 @@ namespace NoteApplication.ViewModel
             }
         }
 
+        private Visibility noteNameVisibility;
+
+        public Visibility NoteNameVisibility
+        {
+            get { return noteNameVisibility; }
+            set 
+            { 
+                noteNameVisibility = value;
+                OnPropertyChanged("NoteNameVisibility");
+            }
+        }
+
+        private Visibility noteCreatedVisibility;
+
+        public Visibility NoteCreatedVisibility
+        {
+            get { return noteCreatedVisibility; }
+            set 
+            { 
+                noteCreatedVisibility = value;
+                OnPropertyChanged("NoteCreatedVisibility");
+            }
+        }
+
+
+
         private string content;
         public string Content
         {
@@ -227,25 +253,25 @@ namespace NoteApplication.ViewModel
             NotebookNameVisibility = Visibility.Collapsed;
             NotebookRenameVisibility = Visibility.Visible;
         }
-        public void StopEditingRenameNotebook(Notebook notebook)
+        public async Task StopEditingRenameNotebookAsync(Notebook notebook)
         {
             NotebookNameVisibility = Visibility.Visible;
             NotebookRenameVisibility = Visibility.Collapsed;
-            DataBaseHelper.UpdateAsync(notebook);
+            await DataBaseHelper.UpdateAsync(notebook);
             GetNotebooksAsync();
         }
         public void StartEditingRenameNote(Note note)
         {
-            if (SelectedNote.Id == note.Id)
-            {
-                NoteRenameVisibility = Visibility.Visible;
-            }
-
+            NoteNameVisibility = Visibility.Collapsed;
+            NoteCreatedVisibility = Visibility.Collapsed;
+            NoteRenameVisibility = Visibility.Visible;
         }
-        public void StopEditingRenameNote(Note note)
+        public async Task StopEditingRenameNoteAsync(Note note)
         {
+            NoteNameVisibility = Visibility.Visible;
+            NoteCreatedVisibility = Visibility.Visible;
             NoteRenameVisibility = Visibility.Collapsed;
-            DataBaseHelper.UpdateAsync(note);
+            await DataBaseHelper.UpdateAsync(note);
             GetNotesAsync();
         }
 

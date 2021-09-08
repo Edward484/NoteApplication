@@ -28,7 +28,7 @@ namespace NoteApplication.ViewModel.Commands
         {
             Notebook notebook = parameter as Notebook;
             if(notebook != null)
-                VM.StopEditingRenameNotebook(notebook);
+                VM.StopEditingRenameNotebookAsync(notebook);
         }
     }
 }

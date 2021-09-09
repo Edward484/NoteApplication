@@ -28,10 +28,16 @@
                           Command="{Binding NewNoteCommand}"
                           CommandParameter="{Binding SelectedNotebook}"/>
                 <Separator/>
+                <MenuItem Header="Log out"
+                          Command="{Binding LogOutCommand}"/>
                 <MenuItem Header="Exit"
                           Command="{Binding ExitCommand}"/>
             </MenuItem>
+            <Button Content="Open Calculator"
+                    Margin="10,0,10,0"
+                    Command="{Binding OpenCaclulatorWindowCommand}"/>
         </Menu>
+        
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
                 <TextBlock x:Name="statusTextBlock"/>
@@ -40,19 +46,30 @@
         </StatusBar>
 
         <StackPanel
-            DockPanel.Dock="Left">
+            DockPanel.Dock="Left" Height="339">
             <TextBlock
-                    Width="100"
-                    Height="100"
-                    DockPanel.Dock="Top">
+                    Width="200"
+                    Height="30"
+                    Text="     All Notebooks:"
+                    Foreground="White"
+                    FontSize="16"
+                    FontWeight="bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <TextBlock.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF2F3138" Offset="0"/>
+                        <GradientStop Color="MidnightBlue" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
             </TextBlock>
 
             <ListView 
                       Background="MidnightBlue"
                       Width="200"
                       SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding Notebooks}">
-            
+                      ItemsSource="{Binding Notebooks}" Height="309">
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -68,37 +85,58 @@
                                     </ContextMenu>
                                 </uc:DisplayNotebook.ContextMenu>
                             </uc:DisplayNotebook>
-                        
+
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
             </ListView>
         </StackPanel>
-        <ListView DockPanel.Dock="Left"
+
+        <StackPanel
+            DockPanel.Dock="Left" Height="339">
+            <TextBlock
+                    Width="200"
+                    Height="30"
+                    Text="     All Notes:"
+                    Foreground="White"
+                    FontSize="16"
+                    FontWeight="bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <TextBlock.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF2F3138" Offset="0"/>
+                        <GradientStop Color="MidnightBlue" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+            <ListView DockPanel.Dock="Left"
                   Width="200"
                   SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notes}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <uc:DisplayNote NoteDep="{Binding}">
-                            <uc:DisplayNote.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Rename note"
-                                              Command="{Binding RenameEditCommandNote, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
-                                    <MenuItem Header="Delete note"
-                                              Command="{Binding DeleteCommandNote, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
-                                </ContextMenu>
-                            </uc:DisplayNote.ContextMenu>
-                        </uc:DisplayNote>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ToolBarTray DockPanel.Dock="Top">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <uc:DisplayNote NoteDep="{Binding}">
+                                <uc:DisplayNote.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Rename note"
+                                                  Command="{Binding RenameEditCommandNote, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                        <MenuItem Header="Delete note"
+                                                  Command="{Binding DeleteCommandNote, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                    </ContextMenu>
+                                </uc:DisplayNote.ContextMenu>
+                            </uc:DisplayNote>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <ToolBarTray DockPanel.Dock="Top"
+                     Height="30">
             <ToolBar>
                 <Button x:Name="SpeechButton"
                         Content="Speech"
@@ -140,7 +178,6 @@
                     <toolkit:RtfFormatter />
                 </toolkit:RichTextBox.TextFormatter>
             </toolkit:RichTextBox>
-
         </Grid>
 
     </DockPanel>

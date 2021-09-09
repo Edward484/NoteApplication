@@ -19,6 +19,7 @@ using System.Windows.Media;
 using Xceed.Wpf.Toolkit;
 using Microsoft.WindowsAzure.MobileServices;
 using System.IO;
+using NoteApplication.View;
 
 namespace NoteApplication.ViewModel
 {
@@ -43,6 +44,8 @@ namespace NoteApplication.ViewModel
         public DeleteCommandNote DeleteCommandNote { get;  set; }
         public DeleteCommandNotebook DeleteCommandNotebook { get; set; }
         public RenameEndEditCommandNote RenameEndEditCommandNote { get; set; }
+        public OpenCalculatorWindowCommand OpenCalculatorWindowCommand { get; set; }
+        public LogOutCommand LogOutCommand { get; set; }
         public ToggleButton BoldButton { get; set; }
 
         private Visibility notebookNameVisibility;
@@ -179,6 +182,8 @@ namespace NoteApplication.ViewModel
             RenameEditCommandNote = new(this);
             DeleteCommandNote = new(this);
             DeleteCommandNotebook = new(this);
+            LogOutCommand = new(this);
+            OpenCalculatorWinddow = new(this);
 
             Notebooks = new();
             Notes = new();
@@ -340,11 +345,31 @@ namespace NoteApplication.ViewModel
 
         }
 
+        internal void LogOut()
+        {
+
+
+            Notebooks.Clear();
+            Notes.Clear();
+            App.userID = String.Empty;
+
+            LoginWindows loginWindow = new();
+            loginWindow.ShowDialog();
+
+            GetNotebooksAsync();
+
+        }
+        internal void OpenCalculatorWinddow()
+        {
+            throw new NotImplementedException();
+        }
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         }
+
+
     }
 }

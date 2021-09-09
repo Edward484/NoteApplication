@@ -39,32 +39,42 @@
 
         </StatusBar>
 
-        <ListView DockPanel.Dock="Left"
-                  Background="MidnightBlue"
-                  Width="200"
-                  SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Notebooks}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <uc:DisplayNotebook NotebookDep="{Binding}">
-                            <uc:DisplayNotebook.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Rename notebook"
-                                              Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
-                                    <MenuItem Header="Delete notebook"
-                                              Command="{Binding DeleteCommandNotebook, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
-                                </ContextMenu>
-                            </uc:DisplayNotebook.ContextMenu>
-                        </uc:DisplayNotebook>
-                        
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <StackPanel
+            DockPanel.Dock="Left">
+            <TextBlock
+                    Width="100"
+                    Height="100"
+                    DockPanel.Dock="Top">
+            </TextBlock>
 
-        </ListView>
+            <ListView 
+                      Background="MidnightBlue"
+                      Width="200"
+                      SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Notebooks}">
+            
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <uc:DisplayNotebook NotebookDep="{Binding}">
+                                <uc:DisplayNotebook.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Rename notebook"
+                                                  Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                        <MenuItem Header="Delete notebook"
+                                                  Command="{Binding DeleteCommandNotebook, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                    </ContextMenu>
+                                </uc:DisplayNotebook.ContextMenu>
+                            </uc:DisplayNotebook>
+                        
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackPanel>
         <ListView DockPanel.Dock="Left"
                   Width="200"
                   SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

@@ -17,7 +17,7 @@
         <vm:NotesViewModel x:Key="vm"/>
         <vm:TextEditorViewModel x:Key="tvm"/>
         <help:DataBaseHelper x:Key="help"/>
-    </Window.Resources>
+	</Window.Resources>
 
     <DockPanel DataContext="{StaticResource vm}">
         <Menu DockPanel.Dock="Top">
@@ -44,26 +44,28 @@
                   Width="200"
                   SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notebooks}">
+			<ListView.Resources>
+				<help:BindingProxy x:Key="proxy" Data="{Binding SelectedNotebook}" />
+			</ListView.Resources>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <uc:DisplayNotebook NotebookDep="{Binding}">
                             <uc:DisplayNotebook.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Rename notebook"
-                                              Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
-                                    <MenuItem Header="Delete notebook"
-                                              Command="{Binding DeleteCommandNotebook, Source={StaticResource vm}}"
-                                              CommandParameter="{Binding}"/>
-                                </ContextMenu>
+								<ContextMenu >
+									<MenuItem Header="Rename notebook"
+																	  Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
+																	  CommandParameter="{Binding}"/>
+									<MenuItem Header="Delete notebook"
+																	  Command="{Binding DeleteCommandNotebook, Source={StaticResource vm}}"
+																	  CommandParameter="{Binding}"/>
+								</ContextMenu>
                             </uc:DisplayNotebook.ContextMenu>
                         </uc:DisplayNotebook>
                         
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
         <ListView DockPanel.Dock="Left"
                   Width="200"

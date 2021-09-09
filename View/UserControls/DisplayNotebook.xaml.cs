@@ -47,4 +47,5 @@ namespace NoteApplication.View.UserControls
             InitializeComponent();
         }
     }
+
 }

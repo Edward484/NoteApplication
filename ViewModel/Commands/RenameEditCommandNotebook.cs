@@ -27,6 +27,7 @@ namespace NoteApplication.ViewModel.Commands
         public void Execute(object parameter)
         {
             Notebook notebook = parameter as Notebook;
+            VM.SelectedNotebook = VM.SelectedNotebook;
             VM.StartEditingRenameNotebook(notebook);
         }
     }

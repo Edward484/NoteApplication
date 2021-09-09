@@ -29,7 +29,7 @@ namespace NoteApplication.ViewModel.Commands
         }
 
         public void Execute(object parameter)
-        {
+        {            
             Note note = parameter as Note;
             VM.DeleteNoteAsync(note);
         }

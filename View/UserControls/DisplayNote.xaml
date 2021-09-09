@@ -11,14 +11,14 @@
         <vm:NotesViewModel x:Key="vm"/>
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="{Binding Title}"
+        <TextBlock Text="{Binding Title, Mode=TwoWay}"
                    Foreground="Black"
                    Margin="3"
                    FontSize="15"
                    FontWeight="bold"
                    VerticalAlignment="Top"
                    Visibility="{Binding NoteNameVisibility, Source={StaticResource vm}}"/>
-        <TextBlock Text="{Binding LastUpdated}"
+        <TextBlock Text="{Binding LastUpdated, Mode=TwoWay}"
                    Foreground="DodgerBlue"
                    Margin="3"
                    FontSize="10"

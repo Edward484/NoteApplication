@@ -64,7 +64,8 @@ namespace NoteApplication.ViewModel
         {
             get { return notebookRenameVisibility; }
             set 
-            { 
+            {
+                SelectedNotebook = SelectedNotebook;
                 notebookRenameVisibility = value;
                 OnPropertyChanged("notebookRenameVisibility");
             }
@@ -164,8 +165,7 @@ namespace NoteApplication.ViewModel
 
         public BoldCommand BoldCommand { get; set; }
         public DependencyProperty FontWeightProperty { get; private set; }
-
-
+        public Notebook LastCreatedNotebook { get; set; }
 
         public NotesViewModel()
         {
@@ -189,7 +189,7 @@ namespace NoteApplication.ViewModel
 
             GetNotebooksAsync();
         }
-        public async Task CreateNotebookAsync()
+        public async void CreateNotebookAsync()
         {
             Notebook newNotebook = new()
             {
@@ -198,10 +198,20 @@ namespace NoteApplication.ViewModel
             };
             await DataBaseHelper.InsertAsync(newNotebook);
 
-            await GetNotebooksAsync();
+            LastCreatedNotebook = newNotebook;
+
+            GetNotebooksAsync();
         }
 
-        public async Task CreateNoteAsync(string notebookID)
+        public async void CreateNotebookAsync(Notebook newNotebook)
+        {
+            await DataBaseHelper.InsertAsync(newNotebook);
+
+            LastCreatedNotebook = newNotebook;
+
+            GetNotebooksAsync();
+        }
+        public async void CreateNoteAsync(string notebookID)
         {
             Note newNote = new()
             {
@@ -213,10 +223,10 @@ namespace NoteApplication.ViewModel
             };
             await DataBaseHelper.InsertAsync(newNote);
 
-            await GetNotesAsync();
+            GetNotesAsync();
         }
 
-        public async Task GetNotebooksAsync()
+        public async void GetNotebooksAsync()
         {
             var notebooks =  ( await DataBaseHelper.ReadAsync<Notebook>()).Where(n => n.UserId == App.userID).ToList();
 
@@ -227,7 +237,7 @@ namespace NoteApplication.ViewModel
             }
         }
 
-        private async Task GetNotesAsync()
+        private async void GetNotesAsync()
         {
             if (selectedNotebook != null)
             {
@@ -243,7 +253,7 @@ namespace NoteApplication.ViewModel
         public void MakeSelectedTextBold(object sender)
         {
             bool isButtonChecked = (sender as ToggleButton).IsChecked ?? false; 
-            
+           
         }
 
 
@@ -253,7 +263,7 @@ namespace NoteApplication.ViewModel
             NotebookNameVisibility = Visibility.Collapsed;
             NotebookRenameVisibility = Visibility.Visible;
         }
-        public async Task StopEditingRenameNotebookAsync(Notebook notebook)
+        public async void StopEditingRenameNotebookAsync(Notebook notebook)
         {
             NotebookNameVisibility = Visibility.Visible;
             NotebookRenameVisibility = Visibility.Collapsed;
@@ -266,7 +276,7 @@ namespace NoteApplication.ViewModel
             NoteCreatedVisibility = Visibility.Collapsed;
             NoteRenameVisibility = Visibility.Visible;
         }
-        public async Task StopEditingRenameNoteAsync(Note note)
+        public async void StopEditingRenameNoteAsync(Note note)
         {
             NoteNameVisibility = Visibility.Visible;
             NoteCreatedVisibility = Visibility.Visible;
@@ -307,18 +317,18 @@ namespace NoteApplication.ViewModel
             return Paragraph;
         }
 
-        internal async Task DeleteNotebookAsync(Notebook notebook)
+        internal async void DeleteNotebookAsync(Notebook notebook)
         {
             for(int i = 0; i < Notes.Count();)
             {
-                await DeleteNoteAsync(Notes[i]);
+                DeleteNoteAsync(Notes[i]);
             }
             var result = await DataBaseHelper.DeleteAsync<Notebook>(notebook);
             Notebooks.Remove(notebook);
-            await GetNotebooksAsync();
+            GetNotebooksAsync();
         }
 
-        internal async Task DeleteNoteAsync(Note note)
+        internal async void DeleteNoteAsync(Note note)
         {          
             //delete content from blob Azure
             string connectionString = "DefaultEndpointsProtocol=https;AccountName=mynotesapplication;AccountKey=p+mA+BiT9EbAuxEU4964sqM2lI7Ddcskj7+GJMJg7LlzRKL8s9hEPBTyh38IYeCMqqFSGzs/4pDh2KLUAY5pFg==;EndpointSuffix=core.windows.net";
@@ -336,7 +346,7 @@ namespace NoteApplication.ViewModel
 
             //remove from local directory
             File.Delete(System.IO.Path.Combine(Environment.CurrentDirectory,downloadPath));
-            await GetNotesAsync();
+            GetNotesAsync();
 
         }
 

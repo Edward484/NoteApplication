@@ -1,6 +1,8 @@
 ﻿using NoteApplication.Model;
+using NoteApplication.ViewModel;
 using NoteApplication.ViewModel.Commands;
 using NoteApplication.ViewModel.Helpers;
+using NotesApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -242,6 +244,7 @@ namespace NoteApplication.ViewModel
                 Authenticated?.Invoke(this, new EventArgs());
             }
 
+            
         }
 
         public async Task RegisterAsync()

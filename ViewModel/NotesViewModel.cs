@@ -50,6 +50,9 @@ namespace NoteApplication.ViewModel
 
         public OpenWeatherWindowCommand OpenWeatherWindowCommand { get; set; }
 
+        public Weather WeatherWindow { get; set; }
+
+
         private Visibility notebookNameVisibility;  
 
         public Visibility NotebookNameVisibility
@@ -187,6 +190,9 @@ namespace NoteApplication.ViewModel
             LogOutCommand = new(this);
             OpenCalculatorWindowCommand = new(this);
             OpenWeatherWindowCommand = new(this);
+            
+            WeatherWindow = new();
+
 
             Notebooks = new();
             Notes = new();
@@ -357,7 +363,7 @@ namespace NoteApplication.ViewModel
 
             //remove from local directory
             File.Delete(System.IO.Path.Combine(Environment.CurrentDirectory,downloadPath));
-            GetNotesAsync(note.NotebookId);
+            GetNotesAsync();
 
         }
 
@@ -383,7 +389,7 @@ namespace NoteApplication.ViewModel
 
         internal void OpenWeatherWindow()
         {
-            Weather WeatherWindow = new();
+            WeatherWindow = new();
             WeatherWindow.ShowDialog(); 
         }
 

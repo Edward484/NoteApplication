@@ -8,7 +8,8 @@
         xmlns:vm="clr-namespace:NoteApplication.ViewModel"
         xmlns:help="clr-namespace:NoteApplication.ViewModel.Helpers"
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:uc="clr-namespace:NoteApplication.View.UserControls"
+        xmlns:uc="clr-namespace:NoteApplication.View.UserControls" 
+        xmlns:vm1="clr-namespace:NotesApplication.ViewModel"
         mc:Ignorable="d"
         Title="Notes" Height="400" Width="800"
         Icon="icons8_book_96_EDe_icon.ico">
@@ -16,6 +17,7 @@
     <Window.Resources>
         <vm:NotesViewModel x:Key="vm"/>
         <vm:TextEditorViewModel x:Key="tvm"/>
+        <vm1:WeatherViewModel x:Key="wvm"/>
         <help:DataBaseHelper x:Key="help"/>
     </Window.Resources>
 
@@ -39,7 +41,43 @@
             <Button Content="Open Weather"
                     Margin="10,0,10,0"
                     Command="{Binding OpenWeatherWindowCommand}"/>
+
+            <StackPanel
+                    Background="#1B86EA"
+                    Width="200">
+                <Grid DataContext="{Binding CurrentWeather}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock DataContext="{StaticResource wvm}"
+                           Text="{Binding ChosenCity.LocalizedName}"
+                           FontSize="20"
+                           Foreground="White"
+                           Grid.ColumnSpan="2"/>
+                    <TextBlock 
+                           Text="{Binding Temperature.Metric.Value,StringFormat={}{0}°C}"
+                           DataContext="{StaticResource wvm}"
+                           Grid.Row="0"
+                           Grid.Column="2"
+                           Grid.RowSpan="2"
+                           FontSize="20"
+                           Grid.ColumnSpan="2"
+                           Foreground="White"
+                           Margin="10"/>
+                </Grid>
+            </StackPanel>
         </Menu>
+
+        
         
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -175,6 +213,10 @@
                 <Button x:Name="SaveButton"
                         Content="Save"
                         Click="SaveButton_ClickAsync"/>
+                <Button
+                    Content="Delete"
+                    Command="{Binding DeleteCommandNote}"
+                    CommandParameter="{Binding SelectedNote}"/>
             </ToolBar>
         </ToolBarTray>
         <Grid>

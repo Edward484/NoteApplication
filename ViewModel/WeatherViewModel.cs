@@ -93,8 +93,11 @@ namespace NotesApplication.ViewModel
             }
             SearchCommand= new(this);
             CitiesCollection = new ObservableCollection<City>();
+        }
 
-
+        public static void SetChosenCity()
+        {
+           // ChosenCity = await AccuWeatherHelper.GetCityAsync("287430");
         }
         public async void MakeQuery()
         {

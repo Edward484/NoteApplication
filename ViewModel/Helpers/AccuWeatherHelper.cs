@@ -26,6 +26,7 @@ namespace NoteApplication.ViewModel.Helpers
         static string baseURL = "http://dataservice.accuweather.com/";
         static string locAutoComplete = "locations/v1/cities/autocomplete?apikey={0}&q={1}";
         static string currentConditions = "currentconditions/v1/{0}?apikey={1}";
+        static string getCity = "/locations/v1/{0}?apikey={1}";
 
         public async static Task<List<City>> GetCities(string query)
         {
@@ -60,7 +61,20 @@ namespace NoteApplication.ViewModel.Helpers
                 return currentWeather;
             
         }
-        
-      
+
+        public static async Task<City> GetCityAsync(string cityId)
+        {
+            City city = new();
+            string url = baseURL + string.Format(getCity, cityId,apiKey);
+
+            using (HttpClient client = new())
+            {
+                var response = await client.GetAsync(url);
+                string json = await response.Content.ReadAsStringAsync();
+                city = JsonConvert.DeserializeObject<City>(json);
+            }
+
+            return city;
+        }
     }
 }

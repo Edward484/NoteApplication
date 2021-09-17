@@ -48,7 +48,9 @@ namespace NoteApplication.ViewModel
         public LogOutCommand LogOutCommand { get; set; }
         public ToggleButton BoldButton { get; set; }
 
-        private Visibility notebookNameVisibility;
+        public OpenWeatherWindowCommand OpenWeatherWindowCommand { get; set; }
+
+        private Visibility notebookNameVisibility;  
 
         public Visibility NotebookNameVisibility
         {
@@ -184,6 +186,7 @@ namespace NoteApplication.ViewModel
             DeleteCommandNotebook = new(this);
             LogOutCommand = new(this);
             OpenCalculatorWindowCommand = new(this);
+            OpenWeatherWindowCommand = new(this);
 
             Notebooks = new();
             Notes = new();
@@ -378,12 +381,18 @@ namespace NoteApplication.ViewModel
             calculatorWindow.ShowDialog();
         }
 
+        internal void OpenWeatherWindow()
+        {
+            Weather WeatherWindow = new();
+            WeatherWindow.ShowDialog(); 
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         }
 
-
+        
     }
 }

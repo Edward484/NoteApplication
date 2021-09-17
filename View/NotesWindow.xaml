@@ -36,6 +36,9 @@
             <Button Content="Open Calculator"
                     Margin="10,0,10,0"
                     Command="{Binding OpenCalculatorWindowCommand}"/>
+            <Button Content="Open Weather"
+                    Margin="10,0,10,0"
+                    Command="{Binding OpenWeatherWindowCommand}"/>
         </Menu>
         
         <StatusBar DockPanel.Dock="Bottom">

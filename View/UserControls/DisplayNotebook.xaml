@@ -17,7 +17,10 @@
                    FontSize="16"
                    FontWeight="bold"
                    VerticalAlignment="Center"
-                   Visibility="{Binding NotebookNameVisibility, Source={StaticResource vm}}"/>
+                   Visibility="{Binding NotebookNameVisibility, Source={StaticResource vm}}">
+
+        </TextBlock>
+
         <TextBox    
             x:Name="RenameNotebookTextBox" 
             Text="{Binding Name, Mode=TwoWay}"

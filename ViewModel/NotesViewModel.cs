@@ -183,7 +183,7 @@ namespace NoteApplication.ViewModel
             DeleteCommandNote = new(this);
             DeleteCommandNotebook = new(this);
             LogOutCommand = new(this);
-            OpenCalculatorWinddow = new(this);
+            OpenCalculatorWindowCommand = new(this);
 
             Notebooks = new();
             Notes = new();
@@ -237,6 +237,19 @@ namespace NoteApplication.ViewModel
             if (selectedNotebook != null)
             {
                 var notes = (await DataBaseHelper.ReadAsync<Note>()).Where(n => n.NotebookId == selectedNotebook.Id).ToList();
+                Notes.Clear();
+                foreach (var note in notes)
+                {
+                    Notes.Add(note);
+                }
+            }
+        }
+
+        private async void GetNotesAsync(string currentNotebookID)
+        {
+            if (currentNotebookID != null)
+            {
+                var notes = (await DataBaseHelper.ReadAsync<Note>()).Where(n => n.NotebookId == currentNotebookID).ToList();
                 Notes.Clear();
                 foreach (var note in notes)
                 {
@@ -341,7 +354,7 @@ namespace NoteApplication.ViewModel
 
             //remove from local directory
             File.Delete(System.IO.Path.Combine(Environment.CurrentDirectory,downloadPath));
-            GetNotesAsync();
+            GetNotesAsync(note.NotebookId);
 
         }
 
@@ -361,7 +374,8 @@ namespace NoteApplication.ViewModel
         }
         internal void OpenCalculatorWinddow()
         {
-            throw new NotImplementedException();
+            CalculatorWindow calculatorWindow = new();
+            calculatorWindow.ShowDialog();
         }
 
         private void OnPropertyChanged(string propertyName)

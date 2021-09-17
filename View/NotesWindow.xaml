@@ -35,7 +35,7 @@
             </MenuItem>
             <Button Content="Open Calculator"
                     Margin="10,0,10,0"
-                    Command="{Binding OpenCaclulatorWindowCommand}"/>
+                    Command="{Binding OpenCalculatorWindowCommand}"/>
         </Menu>
         
         <StatusBar DockPanel.Dock="Bottom">
@@ -114,11 +114,15 @@
             <ListView DockPanel.Dock="Left"
                   Width="200"
                   SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Notes}">
+                  ItemsSource="{Binding Notes}"
+                  Name="Container">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <uc:DisplayNote NoteDep="{Binding}">
+                            <uc:DisplayNote NoteDep="{Binding}"
+                                            Width="{Binding ElementName=Container,Path=ActualWidth}"
+                                            HorizontalAlignment="Left" 
+                                            MaxWidth="180">
                                 <uc:DisplayNote.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Rename note"

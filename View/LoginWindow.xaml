@@ -6,21 +6,15 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:NoteApplication.View"
         xmlns:vm="clr-namespace:NoteApplication.ViewModel"
+        xmlns:help="clr-namespace:NoteApplication.ViewModel.Helpers"
         mc:Ignorable="d"
         Title="Login" Height="500" Width="500"
-        Icon="icons8_book_96_EDe_icon.ico" Background="{x:Null}" Foreground="#00000000">
+        Icon="icons8_book_96_EDe_icon.ico" Background="#00000000" Foreground="#00000000" BorderBrush="#00000000">
     <Window.Resources>
         <ResourceDictionary>
             <vm:LoginViewModel x:Key="vm"/>
             <vm:NotesViewModel x:Key="nvm"/>
-            <Storyboard x:Key="MoveUp"/>
-            <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-            <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-            <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-            <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-            <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-            <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-            <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+
             <ControlTemplate x:Key="LoginButton" TargetType="{x:Type ButtonBase}">
                 <ControlTemplate.Triggers>
                     <Trigger Property="Button.IsDefaulted" Value="true"/>
@@ -37,92 +31,16 @@
                     <Trigger Property="IsEnabled" Value="false"/>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
+
         </ResourceDictionary>
     </Window.Resources>
     <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource MoveUp}"/>
-        </EventTrigger>
 
+       
     </Window.Triggers>
-    <Grid x:Name="Grid" DataContext="{StaticResource vm}" Background="#00C13E3E">
-        <Grid x:Name="Login"
-              Visibility="{Binding LoginVisibility}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="VisualStateGroup">
-                    <VisualStateGroup.Transitions>
-                        <VisualTransition GeneratedDuration="00:00:00"/>
-                    </VisualStateGroup.Transitions>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-            <Rectangle HorizontalAlignment="Left" Height="425" VerticalAlignment="Top" Width="314" Fill="#7FFFFFFF" Grid.Column="1" Margin="95,19,0,0" RenderTransformOrigin="0.5,0.5" RadiusX="19" RadiusY="19">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-            <Rectangle HorizontalAlignment="Center" Height="425" VerticalAlignment="Center" Width="350" Fill="White" Grid.Column="1" RadiusX="20" RadiusY="20" RenderTransformOrigin="0.877,0.271"/>
-
-            <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="74" Margin="381,54,0,0" VerticalAlignment="Top" Width="86" RadiusX="13" RadiusY="13" Fill="#FFAB11CD"/>
-            <TextBlock HorizontalAlignment="Left" Height="76" Text="+" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" FontSize="36" Grid.Column="1" Margin="381,61,0,0" Foreground="White" TextAlignment="Center"/>
-            <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="43" Margin="78,69,0,0" VerticalAlignment="Top" Width="12" RadiusX="0" RadiusY="0" Fill="#FFAB11CD"/>
-            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="41" Margin="112,73,0,0" Text="LOGIN" TextWrapping="Wrap" VerticalAlignment="Top" Width="116" Foreground="#FFAB11CD" FontSize="36" TextAlignment="Justify" FontWeight="Bold" LineHeight="20"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="1" Margin="112,195,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
-            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                     x:Name="UsernameTextBox"
-                     KeyDown="UsernameTextBox_KeyDown"
-                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,258,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
-            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                     x:Name="PasswordTextBox"
-                     KeyDown="PasswordTextBox_KeyDown"
-                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
-            <Button x:Name="button" 
-                    Command="{Binding LoginCommand}"
-                    CommandParameter="{Binding User}"
-                    HorizontalAlignment="Center" Height="48" Margin="0,298,0,0" VerticalAlignment="Top" Width="183" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="1" Foreground="#00838383">
-                <Grid Height="42" Width="173">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="11*"/>
-                        <RowDefinition Height="10*"/>
-                    </Grid.RowDefinitions>
-                    <Rectangle Height="42" Stroke="#FFAB11CD" RadiusX="9.1" RadiusY="9.1" StrokeThickness="4" Grid.RowSpan="2">
-                        <Rectangle.Fill>
-                            <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
-                                <GradientStop Color="#FFAB11CD"/>
-                                <GradientStop Color="#FF9F47B4" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <TextBlock HorizontalAlignment="Center" Height="19" Margin="0,11,0,0" Text="LOGIN" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" Foreground="White" FontSize="15" TextAlignment="Justify" FontWeight="Bold" RenderTransformOrigin="-1.616,-14.603" Grid.RowSpan="2"/>
-                </Grid>
-            </Button>
-            <Button x:Name="GotoRegister"
-                    Command="{Binding ShowRegisterCommand}"
-                    Content="Register" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="267,363,0,0" VerticalAlignment="Top" Width="103" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="15" Foreground="#FF0080FF"/>
-            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="129,369,0,0" Text="Don't have an account?" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Foreground="#FF686666" FontSize="15"/>
-            <Button Command="{Binding ExitCommand, Source={StaticResource nvm}}"
-                    
-                    HorizontalAlignment="Left" Height="48" Margin="62,401,0,0" VerticalAlignment="Top" Width="108" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="1">
-                <Grid Height="42" Width="70">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="11*"/>
-                        <RowDefinition Height="10*"/>
-                    </Grid.RowDefinitions>
-                    <Rectangle Height="42" RadiusX="17" RadiusY="17" StrokeThickness="4" Grid.RowSpan="2" Fill="#FF0B5A91"/>
-                    <TextBlock HorizontalAlignment="Center" Height="19" Margin="0,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" Foreground="White" FontSize="15" TextAlignment="Justify" FontWeight="Bold" RenderTransformOrigin="-1.616,-14.603" Grid.RowSpan="2"><Run Text="EXIT"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
-                </Grid>
-            </Button>
-        </Grid>
+    <Grid x:Name="Grid" DataContext="{StaticResource vm}" Background="#00C13E3E" OpacityMask="#FFAE2727">
         <Grid x:Name="Register" 
-              Visibility="{Binding RegisterVisibility}" d:IsHidden="True">
+              Visibility="{Binding RegisterVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -144,28 +62,30 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
             <Rectangle HorizontalAlignment="Center" Height="425" VerticalAlignment="Center" Width="350" Fill="White" Grid.Column="1" RadiusX="20" RadiusY="20" RenderTransformOrigin="0.877,0.271"/>
-            <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="74" Margin="381,54,0,0" VerticalAlignment="Top" Width="86" RadiusX="13" RadiusY="13" Fill="#FFAB11CD"/>
-            <TextBlock HorizontalAlignment="Left" Height="76" Text="+" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" FontSize="36" Grid.Column="1" Margin="381,61,0,0" Foreground="White" TextAlignment="Center"/>
-            <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="43" Margin="78,69,0,0" VerticalAlignment="Top" Width="12" RadiusX="0" RadiusY="0" Fill="#FFAB11CD"/>
-            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="57" Margin="112,73,0,0" Text="Register" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Foreground="#FFAB11CD" FontSize="36" TextAlignment="Justify" FontWeight="Bold" LineHeight="20"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,183,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
+            
+            
+<TextBlock x:Name="textBlock1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="57" Margin="112,73,0,0" Text="Register" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Foreground="#FF046DB6" FontSize="36" TextAlignment="Justify" FontWeight="Bold" LineHeight="20"/>
+            <Path x:Name="path3" Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,183,0,0" Stretch="Fill" Stroke="sc#1, 0.00334653584, 0.102716692, 0.284873158" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
             <TextBox x:Name="FirstNameTextBox"
                      Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      KeyDown="FirstNameTextBox_KeyDown"
-                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,157,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
+                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,157,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify" AutomationProperties.HelpText="dddd" GotFocus="PlacheholderTextBox_GotFocus" LostFocus="PlaceholderTextBox_LostFocus">
+                
+            </TextBox>
+            
             <Button Command="{Binding RegisterCommand}"
                     CommandParameter="{Binding User}"
                     HorizontalAlignment="Center" Height="48" Margin="0,298,0,0" VerticalAlignment="Top" Width="183" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="1">
-                <Grid Height="42" Width="173">
+                <Grid Height="42" Width="177">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="11*"/>
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
-                    <Rectangle Height="42" Stroke="#FFAB11CD" RadiusX="9.1" RadiusY="9.1" StrokeThickness="4" Grid.RowSpan="2">
+                    <Rectangle x:Name="rectangle4" Height="42" Stroke="sc#1, 0.00334653584, 0.102716692, 0.284873158" RadiusX="9.1" RadiusY="9.1" StrokeThickness="4" Grid.RowSpan="2" Width="177">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
-                                <GradientStop Color="#FFAB11CD"/>
-                                <GradientStop Color="#FF9F47B4" Offset="1"/>
+                                <GradientStop Color="#FF0A5E99"/>
+                                <GradientStop Color="sc#1, 0.07618538, 0.18116425, 0.291770637" Offset="1"/>
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
@@ -174,25 +94,25 @@
             </Button>
             <Button x:Name="GoToLogin"
                     Command="{Binding ShowRegisterCommand}"
-                    Content="Register" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="267,363,0,0" VerticalAlignment="Top" Width="103" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="15" Foreground="#FF0080FF"/>
-            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="129,369,0,0" Text="Don't have an account?" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Foreground="#FF686666" FontSize="15"/>
+                    Content="Login" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="290,363,0,0" VerticalAlignment="Top" Width="101" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="15" Foreground="#FF0080FF"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="147,369,0,0" Text="Do you have an account?" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Foreground="#FF686666" FontSize="15"/>
             <Grid Grid.ColumnSpan="2"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="258,183,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
+            <Path x:Name="path" Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="258,183,0,0" Stretch="Fill" Stroke="#FF0B5B93" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
             <TextBox x:Name="LastNameTextBox"
                      Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      KeyDown="LastNameTextBox_KeyDown"
                      Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="258,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,221,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
+            <Path x:Name="path1" Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,221,0,0" Stretch="Fill" Stroke="sc#1, 0.00334653584, 0.102716692, 0.284873158" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
             <TextBox x:Name="UsernameTextBoxR"
                      Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      KeyDown="UsernameTextBoxR_KeyDown"
-                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="3" Margin="258,222,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
+                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify" AutomationProperties.HelpText="vfdvv"/>
+            <Path x:Name="path4" Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="3" Margin="258,222,0,0" Stretch="Fill" Stroke="sc#1, 0.00334653584, 0.102716692, 0.284873158" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
             <TextBox x:Name="PasswordTextBoxR"
                      Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      KeyDown="PasswordTextBoxR_KeyDown"
                      Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="258,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,258,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
+            <Path x:Name="path2" Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,258,0,0" Stretch="Fill" Stroke="sc#1, 0.00334653584, 0.102716692, 0.284873158" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.51,0.238"/>
             <TextBox x:Name="ConfirmPasswordTextBoxR"
                      Text="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      KeyDown="ConfirmPasswordTextBoxR_KeyDown"
@@ -205,11 +125,129 @@
                         <RowDefinition Height="11*"/>
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
-                    <Rectangle Height="42" RadiusX="17" RadiusY="17" StrokeThickness="4" Grid.RowSpan="2" Fill="#FF0B5A91"/>
+                    <Rectangle x:Name="rectangle5" Height="42" RadiusX="17" RadiusY="17" StrokeThickness="4" Grid.RowSpan="2" Fill="#FF535353"/>
                     <TextBlock HorizontalAlignment="Center" Height="19" Margin="0,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" Foreground="White" FontSize="15" TextAlignment="Justify" FontWeight="Bold" RenderTransformOrigin="-1.616,-14.603" Grid.RowSpan="2"><Run Text="EXIT"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
                 </Grid>
             </Button>
+            <Rectangle x:Name="rectangle_Copy" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="74" Margin="381,54,0,0" VerticalAlignment="Top" Width="74" RadiusX="13" RadiusY="13" Fill="#FF0A5E99"/>
+            <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="74" Text="+" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" Grid.Column="1" Margin="382,60,0,0" Foreground="White" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Rectangle x:Name="rectangle2_Copy" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="43" Margin="78,69,0,0" VerticalAlignment="Top" Width="12" RadiusX="0" RadiusY="0" Fill="#FF0A5E99" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
         </Grid>
+        <Grid x:Name="Login"
+              Visibility="{Binding LoginVisibility}" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="425*"/>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="14*"/>
+            </Grid.ColumnDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="VisualStateGroup">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="00:00:00"/>
+                    </VisualStateGroup.Transitions>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Rectangle HorizontalAlignment="Left" Height="425" VerticalAlignment="Top" Width="314" Fill="#7FFFFFFF" Grid.Column="1" Margin="95,19,0,0" RenderTransformOrigin="0.5,0.5" RadiusX="19" RadiusY="19">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle HorizontalAlignment="Left" Height="425" VerticalAlignment="Center" Width="350" Fill="White" Grid.Column="1" RadiusX="20" RadiusY="20" RenderTransformOrigin="0.877,0.271" Margin="75,0,0,0"/>
+
+            <Rectangle x:Name="rectangle" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="74" Margin="381,54,0,0" VerticalAlignment="Top" Width="74" RadiusX="13" RadiusY="13" Fill="#FFAB11CD"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="74" Text="+" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" Grid.Column="1" Margin="382,60,0,0" Foreground="White" TextAlignment="Center" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Rectangle x:Name="rectangle2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="43" Margin="78,69,0,0" VerticalAlignment="Top" Width="12" RadiusX="0" RadiusY="0" Fill="#FFAB11CD" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Margin="112,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116" Foreground="#FFAB11CD" FontSize="36" TextAlignment="Justify" FontWeight="Bold" LineHeight="20" Text="Login"/>
+            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="1" Margin="112,195,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
+            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     x:Name="UsernameTextBox"
+                     KeyDown="UsernameTextBox_KeyDown"
+                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
+            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,258,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
+            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     x:Name="PasswordTextBox"
+                     KeyDown="PasswordTextBox_KeyDown"
+                     Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
+            <Button x:Name="button"
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding User}"
+                    HorizontalAlignment="Left" Height="48" Margin="158,298,0,0" VerticalAlignment="Top" Width="183" BorderBrush="{x:Null}" Grid.Column="1" Foreground="{x:Null}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{x:Null}">
+                <Grid Height="42" Width="177">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="11*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Height="42" Stroke="#FFAB11CD" RadiusX="9.1" RadiusY="9.1" StrokeThickness="4" Grid.RowSpan="2">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                                <GradientStop Color="#FFAB11CD"/>
+                                <GradientStop Color="#FF9F47B4" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock HorizontalAlignment="Center" Height="19" Margin="0,11,0,0" Text="LOGIN" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" Foreground="White" FontSize="15" TextAlignment="Justify" FontWeight="Bold" RenderTransformOrigin="-1.616,-14.603" Grid.RowSpan="2"/>
+                </Grid>
+            </Button>
+
+
+            <Button x:Name="GotoRegister"
+                    Command="{Binding ShowRegisterCommand}"
+                    Content="Register" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="267,363,0,0" VerticalAlignment="Top" Width="103" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="15" Foreground="#FF0080FF"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="129,369,0,0" Text="Don't have an account?" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Foreground="#FF686666" FontSize="15"/>
+        </Grid>
+        <Button x:Name="QuitFormButton_Copy"
+            Command="{Binding ExitCommand, Source={StaticResource nvm}}"
+            HorizontalAlignment="Left" Height="48" Margin="62,401,0,0" VerticalAlignment="Top" Width="108" BorderBrush="{x:Null}" Background="{x:Null}">
+            <Grid Height="42" Width="70">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <Rectangle x:Name="rectangle1" Height="42" RadiusX="17" RadiusY="17" StrokeThickness="4" Grid.RowSpan="2" Fill="#FF535353"/>
+                <TextBlock HorizontalAlignment="Center" Height="19" Margin="0,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" Foreground="White" FontSize="15" TextAlignment="Justify" FontWeight="Bold" RenderTransformOrigin="-1.616,-14.603" Grid.RowSpan="2"><Run Text="EXIT"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
+            </Grid>
+        </Button>
     </Grid>
 
 

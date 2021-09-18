@@ -101,6 +101,19 @@ namespace NoteApplication.ViewModel
             }
         }
 
+        internal void PutPlaceholdersBack()
+        {
+            if (FirstName == "")
+                FirstName = "First Name";
+            if (LastName == "")
+                LastName = "Last Name";
+        }
+
+        internal void RemovePlaceholderTextBox(TextBox textbox)
+        {
+            
+        }
+
         private string confirmPassword;
 
         public string ConfirmPassword
@@ -209,6 +222,8 @@ namespace NoteApplication.ViewModel
 
         public LoginViewModel()
         {
+            
+
             LoginVisibility = Visibility.Visible;
             RegisterVisibility = Visibility.Collapsed;
 
@@ -218,6 +233,17 @@ namespace NoteApplication.ViewModel
             ChangeFocusRegisterCommand = new(this);
 
             User = new();
+
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()) == true)
+            {
+                RegisterVisibility = Visibility.Visible;
+            }
+
+            FirstName = "First Name";
+            LastName = "Last Name";
+            ConfirmPassword = "Confirm Password";
+            Password = "Password";
+            Username = "Email";
         }
 
         public void SwitchViews()
@@ -236,7 +262,7 @@ namespace NoteApplication.ViewModel
             }
         }
 
-        public async Task LoginAsync()
+        public async void LoginAsync()
         {
             bool result = await FirebaseAuthHelper.LoginAsync(user);
             if(result == true)
@@ -247,7 +273,7 @@ namespace NoteApplication.ViewModel
             
         }
 
-        public async Task RegisterAsync()
+        public async void RegisterAsync()
         {
             bool result = await FirebaseAuthHelper.RegisterAsync(user);
             if(result == true)

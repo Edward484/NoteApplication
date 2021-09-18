@@ -62,7 +62,7 @@ namespace NoteApplication.ViewModel.Helpers
             
         }
 
-        public static async Task<City> GetCityAsync(string cityId)
+        public static async Task<City>GetCityAsync(string cityId)
         {
             City city = new();
             string url = baseURL + string.Format(getCity, cityId,apiKey);

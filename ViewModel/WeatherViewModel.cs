@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using NoteApplication.Model;
 using NoteApplication.ViewModel.Commands;
 using NoteApplication.ViewModel.Helpers;
@@ -50,12 +51,37 @@ namespace NotesApplication.ViewModel
                 if (chosenCity != null)
                 {
                     OnPropertyChanged("ChosenCity");
+                    SearchCityEnd();
                     GetCurrentWeather();
                 }
             }
         }
 
-        
+        private Visibility showWeatherStackPanel;
+
+        public Visibility ShowWeatherStackPanel
+        {
+            get { return showWeatherStackPanel; }
+            set
+            {
+                showWeatherStackPanel = value;
+                OnPropertyChanged("showWeatherStackPanel");
+            }
+        }
+
+        private Visibility showSearchStackPanel;
+
+        public Visibility ShowSearchStackPanel
+        {
+            get { return showSearchStackPanel; }
+            set
+            {
+                showSearchStackPanel = value;
+                OnPropertyChanged("showSearchStackPanel");
+            }
+        }
+
+
         private async void GetCurrentWeather()
         {
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()) == false)
@@ -70,6 +96,8 @@ namespace NotesApplication.ViewModel
 
 
         public SearchCommand SearchCommand { get; set; }
+        public OpenSearchCityCommand OpenSearchCityCommand { get; set; }
+
 
         public WeatherViewModel()
         {
@@ -92,7 +120,11 @@ namespace NotesApplication.ViewModel
                 };
             }
             SearchCommand= new(this);
+            OpenSearchCityCommand = new(this);
             CitiesCollection = new ObservableCollection<City>();
+
+            ShowWeatherStackPanel = Visibility.Visible;
+            ShowSearchStackPanel = Visibility.Collapsed;
         }
 
         public static void SetChosenCity()
@@ -111,6 +143,18 @@ namespace NotesApplication.ViewModel
                 }
             }
         }
+        internal void SearchCityStart()
+        {
+            ShowWeatherStackPanel = Visibility.Collapsed;
+            ShowSearchStackPanel = Visibility.Visible;
+        }
+
+        internal void SearchCityEnd()
+        {
+            ShowWeatherStackPanel = Visibility.Visible;
+            ShowSearchStackPanel = Visibility.Collapsed;
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;

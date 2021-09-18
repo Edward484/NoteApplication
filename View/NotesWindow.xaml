@@ -11,7 +11,7 @@
         xmlns:uc="clr-namespace:NoteApplication.View.UserControls" 
         xmlns:vm1="clr-namespace:NotesApplication.ViewModel"
         mc:Ignorable="d"
-        Title="Notes" Height="400" Width="800"
+        Title="Notes" Height="400" Width="1050"
         Icon="icons8_book_96_EDe_icon.ico">
 
     <Window.Resources>
@@ -42,39 +42,7 @@
                     Margin="10,0,10,0"
                     Command="{Binding OpenWeatherWindowCommand}"/>
 
-            <StackPanel
-                    Background="#1B86EA"
-                    Width="200">
-                <Grid DataContext="{Binding CurrentWeather}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock DataContext="{StaticResource wvm}"
-                           Text="{Binding ChosenCity.LocalizedName}"
-                           FontSize="20"
-                           Foreground="White"
-                           Grid.ColumnSpan="2"/>
-                    <TextBlock 
-                           Text="{Binding Temperature.Metric.Value,StringFormat={}{0}°C}"
-                           DataContext="{StaticResource wvm}"
-                           Grid.Row="0"
-                           Grid.Column="2"
-                           Grid.RowSpan="2"
-                           FontSize="20"
-                           Grid.ColumnSpan="2"
-                           Foreground="White"
-                           Margin="10"/>
-                </Grid>
-            </StackPanel>
+            
         </Menu>
 
         
@@ -222,12 +190,15 @@
         <Grid>
             <toolkit:RichTextBox x:Name="contentRichTextBox"
                          TextChanged="contentRichTextBox_TextChanged"
-                         SelectionChanged="contentRichTextBox_SelectionChanged">
+                         SelectionChanged="contentRichTextBox_SelectionChanged" Width="400">
                 <toolkit:RichTextBox.TextFormatter>
                     <toolkit:RtfFormatter />
                 </toolkit:RichTextBox.TextFormatter>
             </toolkit:RichTextBox>
         </Grid>
+        <uc:WeatherUserControl DockPanel.Dock="Right">
+            
+        </uc:WeatherUserControl>
 
     </DockPanel>
 </Window>

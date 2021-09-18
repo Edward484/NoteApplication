@@ -1,0 +1,1 @@
+        Visibility="{Binding ShowWeatherStackPanel, Source={StaticResource wvm}}"

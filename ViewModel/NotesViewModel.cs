@@ -389,7 +389,6 @@ namespace NoteApplication.ViewModel
 
         internal void OpenWeatherWindow()
         {
-            WeatherWindow = new();
             WeatherWindow.ShowDialog(); 
         }
 

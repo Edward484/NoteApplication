@@ -175,6 +175,7 @@ namespace NoteApplication.ViewModel
             }
         }
 
+      
         private TextBox usernameTextBox;
 
         public TextBox UsernameTextBox

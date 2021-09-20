@@ -94,15 +94,6 @@ namespace NoteApplication.View
             }
         }
 
-        private void PlacheholderTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-            textbox.Text = "";
-        }
-
-        private void PlaceholderTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            vm.PutPlaceholdersBack();
-        }
+        
     }
 }

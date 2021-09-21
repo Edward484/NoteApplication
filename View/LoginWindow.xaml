@@ -56,6 +56,146 @@
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
 
+            <Storyboard x:Key="LastNameTextBoxSelected">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFAB11CD">
+                        <EasingColorKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingColorKeyFrame.EasingFunction>
+                    </EasingColorKeyFrame>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="LastNameTextBoxLostFocus">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFAB11CD"/>
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FF0A5E99"/>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="PasswordRTextBoxSelected">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFAB11CD">
+                        <EasingColorKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingColorKeyFrame.EasingFunction>
+                    </EasingColorKeyFrame>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="PasswordRTextBoxLostFocus">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFAB11CD"/>
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FF0A5E99"/>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="UsernameRTextBoxSelected">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFAB11CD">
+                        <EasingColorKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingColorKeyFrame.EasingFunction>
+                    </EasingColorKeyFrame>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="UsernameRTextBoxLostFocus">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFAB11CD"/>
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FF0A5E99"/>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="ConfirmPasswordTextBoxSelected">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFAB11CD">
+                        <EasingColorKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingColorKeyFrame.EasingFunction>
+                    </EasingColorKeyFrame>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="ConfirmPasswordTextBoxLostFocus">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFAB11CD"/>
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FF0A5E99"/>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="PasswordTextBoxSelected">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="PasswordPath" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FF0A5E99">
+                        <EasingColorKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingColorKeyFrame.EasingFunction>
+                    </EasingColorKeyFrame>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PasswordPath" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="PasswordTextBoxLostFocus">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="PasswordPath" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF0A5E99"/>
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFAB11CD"/>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PasswordPath" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="UsernameTextBoxSelected">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="UsernamePath" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FF0A5E99">
+                        <EasingColorKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingColorKeyFrame.EasingFunction>
+                    </EasingColorKeyFrame>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UsernamePath" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="UsernameTextBoxLostFocus">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="UsernamePath" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" >
+                    <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF0A5E99"/>
+                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFAB11CD"/>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UsernamePath" Storyboard.TargetProperty="(Shape.StrokeThickness)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            
+
 
 
 
@@ -67,6 +207,42 @@
         </EventTrigger>
         <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="FirstNameTextBox">
             <BeginStoryboard Storyboard="{StaticResource FirstNameTextBoxLostFocus}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="LastNameTextBox">
+            <BeginStoryboard Storyboard="{StaticResource LastNameTextBoxSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="LastNameTextBox">
+            <BeginStoryboard Storyboard="{StaticResource LastNameTextBoxLostFocus}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="UsernameTextBoxR">
+            <BeginStoryboard Storyboard="{StaticResource UsernameRTextBoxSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="UsernameTextBoxR">
+            <BeginStoryboard Storyboard="{StaticResource UsernameRTextBoxLostFocus}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="PasswordTextBoxR">
+            <BeginStoryboard Storyboard="{StaticResource PasswordRTextBoxSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="PasswordTextBoxR">
+            <BeginStoryboard Storyboard="{StaticResource PasswordRTextBoxLostFocus}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="ConfirmPasswordTextBoxR">
+            <BeginStoryboard Storyboard="{StaticResource ConfirmPasswordTextBoxSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="ConfirmPasswordTextBoxR">
+            <BeginStoryboard Storyboard="{StaticResource ConfirmPasswordTextBoxLostFocus}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="UsernameTextBox">
+            <BeginStoryboard Storyboard="{StaticResource UsernameTextBoxSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="UsernameTextBox">
+            <BeginStoryboard Storyboard="{StaticResource UsernameTextBoxLostFocus}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="PasswordTextBox">
+            <BeginStoryboard Storyboard="{StaticResource PasswordTextBoxSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="PasswordTextBox">
+            <BeginStoryboard Storyboard="{StaticResource PasswordTextBoxLostFocus}"/>
         </EventTrigger>
 
     </Window.Triggers>
@@ -230,15 +406,17 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
             <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Margin="112,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116" Foreground="#FFAB11CD" FontSize="36" TextAlignment="Justify" FontWeight="Bold" LineHeight="20" Text="Login"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="1" Margin="112,195,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
+            <Path x:Name="UsernamePath" Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="1" Margin="112,195,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
             <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      x:Name="UsernameTextBox"
+                     Style="{StaticResource MyWaterMarkStyle}" Tag="Email"
                      KeyDown="UsernameTextBox_KeyDown"
                      Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
-            <Path Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,258,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
+            <Path x:Name="PasswordPath" Grid.ColumnSpan="2" Data="M90,184.04 L393,184.04" HorizontalAlignment="Left" Height="17" Margin="112,258,0,0" Stretch="Fill" Stroke="#FFAB11CD" VerticalAlignment="Top" Width="253" RenderTransformOrigin="0.51,0.238"/>
             <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      x:Name="PasswordTextBox"
                      KeyDown="PasswordTextBox_KeyDown"
+                     Style="{StaticResource MyWaterMarkStyle}" Tag="Password"
                      Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="112,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF686666" TextAlignment="Justify"/>
 
 

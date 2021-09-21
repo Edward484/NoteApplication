@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:NoteApplication.View" 
         xmlns:vm="clr-namespace:NoteApplication.ViewModel" 
         xmlns:vm1="clr-namespace:NotesApplication.ViewModel" 
-        xmlns:help="clr-namespace:NoteApplication.ViewModel.Helpers"
+        xmlns:help="clr-namespace:NoteApplication.ViewModel.Helpers" 
+        xmlns:uc="clr-namespace:NoteApplication.View.UserControls"
         mc:Ignorable="d"
         Title="NewNotesWindow" Height="720" Width="1280" Background="{x:Null}">
 
@@ -31,7 +32,35 @@
         </Rectangle>
         <Rectangle HorizontalAlignment="Left" Height="704" Margin="229,0,0,0" VerticalAlignment="Center" Width="1051" Fill="#FFFFFCE6" RadiusY="30" RadiusX="30"/>
         <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="200">
-            <StackPanel HorizontalAlignment="Left" Height="439" Margin="10,52,0,0" VerticalAlignment="Top" Width="205"/>
+            <StackPanel HorizontalAlignment="Left" Height="391" Margin="10,100,0,0" VerticalAlignment="Top" Width="205">
+                <ListView 
+                      Background="{x:Null}"
+                      Width="222"
+                      SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Notebooks}" Height="437" BorderBrush="{x:Null}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <uc:DisplayNotebook NotebookDep="{Binding}">
+                                    <uc:DisplayNotebook.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Rename notebook"
+                                                  Command="{Binding RenameEditCommandNotebook, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                            <MenuItem Header="Delete notebook"
+                                                  Command="{Binding DeleteCommandNotebook, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                        </ContextMenu>
+                                    </uc:DisplayNotebook.ContextMenu>
+                                </uc:DisplayNotebook>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="116" Margin="10,588,0,0" VerticalAlignment="Top" Width="205">
                 <Grid Height="100">
                     <Menu Background="{x:Null}" Margin="72,0,30,0">
@@ -43,6 +72,41 @@
                             Command="{Binding ExitCommand}"/>
                     </Menu>
                 </Grid>
+            </StackPanel>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,56,0,0" Height="39" Width="200">
+                <Rectangle Height="33" RadiusX="10.84" RadiusY="10.84" Fill="#FFFFFCE6" Margin="12,3,-37,3"/>
+                <TextBlock HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" TextAlignment="Center" Foreground="#FFCD216F" FontSize="20" Margin="12,3,0,0"><Run Text="Your Notebooks"/><LineBreak/><Run/></TextBlock>
+            </Grid>
+        </Grid>
+        <Rectangle HorizontalAlignment="Left" Height="704" Margin="230,0,0,0" VerticalAlignment="Center" Width="230" RadiusX="30" RadiusY="30"/>
+        <Grid HorizontalAlignment="Left" Height="704" Margin="234,0,0,0" VerticalAlignment="Center" Width="226">
+            <StackPanel HorizontalAlignment="Center" Height="391" Margin="0,106,0,0" VerticalAlignment="Top" Width="205">
+                <ListView DockPanel.Dock="Left"
+                  SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Notes}"
+                  x:Name="ListViewNotes">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <uc:DisplayNote NoteDep="{Binding}"
+                                            Width="{Binding ElementName=Container,Path=ActualWidth}"
+                                            HorizontalAlignment="Left" 
+                                            MaxWidth="180">
+                                    <uc:DisplayNote.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Rename note"
+                                                  Command="{Binding RenameEditCommandNote, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                            <MenuItem Header="Delete note"
+                                                  Command="{Binding DeleteCommandNote, Source={StaticResource vm}}"
+                                                  CommandParameter="{Binding}"/>
+                                        </ContextMenu>
+                                    </uc:DisplayNote.ContextMenu>
+                                </uc:DisplayNote>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
         </Grid>
 

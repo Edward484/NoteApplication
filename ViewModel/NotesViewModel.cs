@@ -202,7 +202,31 @@ namespace NoteApplication.ViewModel
             LastUsedFontSize = 12;
 
             GetNotebooksAsync();
-        }
+
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()) == true)
+            {
+                Note newNote = new()
+                {
+                    Title = $"New note"
+                };
+                Notes.Add(newNote);
+                Note newNote1 = new()
+                {
+                    Title = $"New note"
+                };
+                Notes.Add(newNote1);
+                Note newNote2 = new()
+                {
+                    Title = $"New note"
+                };
+                Notes.Add(newNote2);
+                Note newNote3 = new()
+                {
+                    Title = $"New note"
+                };
+                Notes.Add(newNote3);
+            }
+            }
         public async void CreateNotebookAsync()
         {
             Notebook newNotebook = new()

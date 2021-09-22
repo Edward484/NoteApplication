@@ -11,7 +11,7 @@
         xmlns:help="clr-namespace:NoteApplication.ViewModel.Helpers" 
         xmlns:uc="clr-namespace:NoteApplication.View.UserControls"
         mc:Ignorable="d"
-        Title="NewNotesWindow" Height="720" Width="1280" Background="{x:Null}">
+        Title="NewNotesWindow" Height="750" Width="1280" Background="{x:Null}">
 
     <Window.Resources>
         <vm:NotesViewModel x:Key="vm"/>
@@ -78,26 +78,30 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-    <Grid DataContext="{StaticResource vm}">
-        <Rectangle HorizontalAlignment="Left" Height="67" Margin="200,657,0,0" VerticalAlignment="Top" Width="59" Fill="#FFFFFCE6"/>
+    <Grid DataContext="{StaticResource vm}" Margin="0,-36,0,4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1259*"/>
+            <ColumnDefinition Width="21*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle HorizontalAlignment="Left" Height="67" Margin="200,685,0,0" VerticalAlignment="Top" Width="59" Fill="#FFFFFCE6" RenderTransformOrigin="0.466,1.389"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="67" Margin="200,0,0,0" VerticalAlignment="Top" Width="59" Fill="#FFFFFCE6"/>
+        <Rectangle HorizontalAlignment="Left" Height="52" Margin="200,15,0,0" VerticalAlignment="Top" Width="59" Fill="#FFFFFCE6"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="229" RadiusX="30" RadiusY="30">
+        <Rectangle HorizontalAlignment="Left" Height="737" VerticalAlignment="Center" Width="229" RadiusX="30" RadiusY="30">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFFB3D3D" Offset="0"/>
-                    <GradientStop Color="#FF650C46" Offset="0.941"/>
+                    <GradientStop Color="#FF650C46" Offset="0.948"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle HorizontalAlignment="Left" Height="704" Margin="229,0,0,0" VerticalAlignment="Center" Width="1051" Fill="#FFFFFCE6" RadiusY="30" RadiusX="30"/>
-        <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="200">
-            <StackPanel HorizontalAlignment="Left" Height="391" Margin="10,100,0,0" VerticalAlignment="Top" Width="205">
+        <Rectangle HorizontalAlignment="Left" Height="737" Margin="229,0,0,0" VerticalAlignment="Center" Width="1051" Fill="#FFFFFCE6" RadiusY="30" RadiusX="30" Grid.ColumnSpan="2"/>
+        <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="224">
+            <StackPanel HorizontalAlignment="Left" Height="391" Margin="0,100,0,0" VerticalAlignment="Top" Width="269">
                 <ListView 
                       ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
                       Background="{x:Null}"
-                      Width="222"
+                      Width="220"
                       SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Notebooks}" Height="390" BorderBrush="{x:Null}">
 
@@ -137,13 +141,21 @@
                 </Grid>
             </StackPanel>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,56,0,0" Height="39" Width="200">
-                <Rectangle Height="33" RadiusX="10.84" RadiusY="10.84" Fill="#FFFFFCE6" Margin="12,3,-37,3"/>
+                <Rectangle Height="33" RadiusX="11" RadiusY="11" Fill="#FFFFFCE6" Margin="12,3,-24,3" Width="212"/>
                 <TextBlock HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" TextAlignment="Center" Foreground="#FFCD216F" FontSize="20" Margin="12,3,0,0"><Run Text="Your Notebooks"/><LineBreak/><Run/></TextBlock>
             </Grid>
         </Grid>
         <Rectangle HorizontalAlignment="Left" Height="704" Margin="230,0,0,0" VerticalAlignment="Center" Width="250" RadiusX="30" RadiusY="30"/>
         <Grid HorizontalAlignment="Left" Height="704" Margin="234,0,0,0" VerticalAlignment="Center" Width="250">
-            <StackPanel x:Name="WeatherStackPanel" HorizontalAlignment="Center" Height="140" Margin="0,565,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5">
+            <Border BorderThickness="3,3,3,3" Margin="10,93,10,208" CornerRadius="0,0,10,10">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF39029A"/>
+                        <GradientStop Color="#FF1B86EA" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
+            <StackPanel x:Name="WeatherStackPanel" HorizontalAlignment="Center" Height="140" Margin="0,565,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -152,7 +164,7 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </StackPanel.RenderTransform>
-                <uc:WeatherUserControl Height="288" RenderTransformOrigin="0.5,0.5">
+                <uc:WeatherUserControl Height="288" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
                     <uc:WeatherUserControl.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="1.004"/>
@@ -163,7 +175,7 @@
                     </uc:WeatherUserControl.RenderTransform>
                 </uc:WeatherUserControl>
             </StackPanel>
-            <StackPanel x:Name="stackPanel" HorizontalAlignment="Center" Height="390" Margin="0,106,0,0" VerticalAlignment="Top" Width="205" RenderTransformOrigin="0.5,0.5">
+            <StackPanel x:Name="stackPanel" HorizontalAlignment="Center" Height="388" Margin="0,108,0,0" VerticalAlignment="Top" Width="205" RenderTransformOrigin="0.5,0.5">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -175,7 +187,7 @@
                 <ListView DockPanel.Dock="Left"
                   SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notes}"
-                  x:Name="ListViewNotes">
+                  x:Name="ListViewNotes" Background="{x:Null}" BorderBrush="{x:Null}" Height="194">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -200,16 +212,8 @@
                 </ListView>
             </StackPanel>
         </Grid>
-        <StackPanel HorizontalAlignment="Left" Height="528" Margin="550,139,0,0" VerticalAlignment="Top" Width="686">
+        <StackPanel HorizontalAlignment="Left" Height="593" Margin="507,62,0,0" VerticalAlignment="Top" Width="750">
             <Grid Height="82">
-                <Rectangle RadiusX="12.571" RadiusY="12.571" Margin="0,41,0,0">
-                    <Rectangle.Fill>
-                        <LinearGradientBrush EndPoint="0.8,0" StartPoint="0.5,0">
-                            <GradientStop Color="#FF650C46" Offset="1"/>
-                            <GradientStop Color="#FFFB3D3D"/>
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
                 <ToolBarTray Panel.ZIndex="70" Background="{x:Null}" Margin="0,41,0,0">
                     <ToolBar Background="{x:Null}" Foreground="{x:Null}" Margin="0,0,0,-38" Width="483">
                         <Button x:Name="SpeechButton"
@@ -248,16 +252,17 @@
                             CommandParameter="{Binding SelectedNote}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     </ToolBar>
                 </ToolBarTray>
+                <Rectangle RadiusX="12.571" RadiusY="12.571" Margin="0,41,0,0">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.8,0" StartPoint="0.5,0">
+                            <GradientStop Color="#FF650C46" Offset="1"/>
+                            <GradientStop Color="#FFFB3D3D"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
             </Grid>
-            <Grid Height="442">
-                <toolkit:RichTextBox x:Name="contentRichTextBox"
-                         TextChanged="contentRichTextBox_TextChanged"
-                         SelectionChanged="contentRichTextBox_SelectionChanged" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,10">
-                    <toolkit:RichTextBox.TextFormatter>
-                        <toolkit:RtfFormatter />
-                    </toolkit:RichTextBox.TextFormatter>
-                </toolkit:RichTextBox>
-                <Border BorderThickness="4,0,4,4" Margin="0,0,0,10" CornerRadius="20,20,20,20" Width="686" FlowDirection="LeftToRight">
+            <Grid Height="494">
+                <Border BorderThickness="4,0,4,4" Margin="0,0,0,10" CornerRadius="20,20,20,20" FlowDirection="LeftToRight">
                     <Border.BorderBrush>
                         <LinearGradientBrush EndPoint="0,0.5" StartPoint="0.5,0">
                             <LinearGradientBrush.Transform>
@@ -273,9 +278,77 @@
                         </LinearGradientBrush>
                     </Border.BorderBrush>
                 </Border>
+                <toolkit:RichTextBox x:Name="contentRichTextBox"
+                         TextChanged="contentRichTextBox_TextChanged"
+                         SelectionChanged="contentRichTextBox_SelectionChanged" Background="{x:Null}" BorderBrush="#FFFFFCE6" Margin="20,10,20,20" SelectionBrush="Black" SelectionTextBrush="Black" CaretBrush="#FF464646">
+                    <toolkit:RichTextBox.TextFormatter>
+                        <toolkit:RtfFormatter />
+                    </toolkit:RichTextBox.TextFormatter>
+                </toolkit:RichTextBox>
             </Grid>
         </StackPanel>
-        <TextBlock x:Name="statusTextBlock" HorizontalAlignment="Left" Height="47" Margin="566,631,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
+
+        <Border BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="50" Margin="489,685,0,0" VerticalAlignment="Top" Width="791"  CornerRadius="0,10,10,10" Grid.ColumnSpan="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5" Angle="270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF39029A"/>
+                    <GradientStop Color="#FF1B86EA" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <TextBlock x:Name="statusTextBlock" HorizontalAlignment="Left" Height="36" Margin="523,694,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Foreground="White" FontSize="16"/>
+        <Border HorizontalAlignment="Left" Height="52" Margin="244,72,0,0" VerticalAlignment="Top" Width="230"  CornerRadius="00,10,0,0">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5" Angle="270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF39039A"/>
+                    <GradientStop Color="#FF39049B" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Button Content="New Note" HorizontalAlignment="Center" Height="52" VerticalAlignment="Center" Width="230" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFFCE6"
+                    Command="{Binding NewNoteCommand}"
+                    CommandParameter="{Binding SelectedNotebook}"/>
+        </Border>
+        <Expander  Margin="804,694,0,36" ExpandDirection="Right" Grid.ColumnSpan="2" >
+            <StackPanel >
+                <Grid Height="38" Width="438">
+                    <TextBlock
+                        Text="Last updated:"
+                        Foreground="White"
+                        FontSize="13"
+                        Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" Margin="0,0,356,0"/>
+                    <TextBlock Text="{Binding SelectedNote.LastUpdated}"
+                        Foreground="White"
+                        FontSize="13"
+                        Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" Margin="82,0,219,0"/>
+                    <TextBlock
+                        Text="Created at:"
+                        Foreground="White"
+                        FontSize="13"
+                        Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" Margin="229,0,143,3"/>
+                    <TextBlock Text="{Binding SelectedNote.CreatedTime}"
+                        Foreground="DodgerBlue"
+                        FontSize="13"
+                        Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" Margin="300,0,0,0"/>
+                </Grid>
+            </StackPanel>
+        </Expander>
 
     </Grid>
 </Window>

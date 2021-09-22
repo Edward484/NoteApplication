@@ -6,62 +6,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NoteApplication.View.UserControls" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="200">
+             d:DesignHeight="100" d:DesignWidth="300">
     <UserControl.Resources>
         <vm:NotesViewModel x:Key="vm"/>
     </UserControl.Resources>
-    <StackPanel>
+    
+    <StackPanel  Margin="0,5,0,5">
         <TextBlock Text="{Binding Title}"
-                   Foreground="Black"
+                   Foreground="#FF650C46"
                    Margin="3"
                    FontSize="15"
                    FontWeight="bold"
                    VerticalAlignment="Top"
                    Visibility="{Binding NoteNameVisibility, Source={StaticResource vm}}"/>
-        <Expander>
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock
-                       Text="Last updated:"
-                       Foreground="Black"
-                       Margin="3"
-                       FontSize="10"
-                       VerticalAlignment="Center"
-                       Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding LastUpdated}"
-                       Foreground="DodgerBlue"
-                       Margin="3"
-                       FontSize="10"
-                       VerticalAlignment="Center"
-                       Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" 
-                       Grid.Column="1"/>
-                    <TextBlock
-                       Text="Created at:"
-                       Foreground="Black"
-                       Margin="3"
-                       FontSize="10"
-                       VerticalAlignment="Center"
-                       Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" HorizontalAlignment="Left"
-                       Grid.Row="1"/>
-                    <TextBlock Text="{Binding CreatedTime}"
-                       Foreground="DodgerBlue"
-                       Margin="3"
-                       FontSize="10"
-                       VerticalAlignment="Center"
-                       Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}"
-                       Grid.Column="1"
-                       Grid.Row="1"/>
-                </Grid>
-            </StackPanel>
-        </Expander>
+        
+        
+        
 
         <TextBox x:Name="RenameNoteTextBox"
                  Text="{Binding Title, Mode=TwoWay}"
@@ -69,7 +29,7 @@
                  VerticalAlignment="Top"
                  FontSize="15" 
                  Margin="0,3,0,19"
-                 Width="180">
+                 Width="180" Background="{x:Null}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="LostFocus">
                     <i:InvokeCommandAction 

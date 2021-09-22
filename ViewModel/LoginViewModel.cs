@@ -239,12 +239,6 @@ namespace NoteApplication.ViewModel
             {
                 RegisterVisibility = Visibility.Visible;
             }
-
-            FirstName = "First Name";
-            LastName = "Last Name";
-            ConfirmPassword = "Confirm Password";
-            Password = "Password";
-            Username = "Email";
         }
 
         public void SwitchViews()

@@ -9,9 +9,29 @@
              d:DesignHeight="100" d:DesignWidth="200">
     <UserControl.Resources>
         <vm:NotesViewModel x:Key="vm"/>
+        <Storyboard x:Key="Storyboard1">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="NotebookTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFE41F1F"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard2">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="NotebookTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFE41F1F"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.1000000" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="NotebookTextBlock">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="NotebookTextBlock">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard2}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
     <StackPanel>
-        <TextBlock Text="{Binding Name,Mode=TwoWay}"
+        <TextBlock x:Name="NotebookTextBlock"
+                   Text="{Binding Name,Mode=TwoWay}"
                    Foreground="White"
                    Margin="15"
                    FontSize="16"

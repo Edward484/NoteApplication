@@ -9,7 +9,7 @@
                 xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
 
         xmlns:help="clr-namespace:NoteApplication.ViewModel.Helpers" 
-        xmlns:uc="clr-namespace:NoteApplication.View.UserControls"
+        xmlns:uc="clr-namespace:NoteApplication.View.UserControls" d:DataContext="{d:DesignInstance Type=vm1:WeatherViewModel}"
         mc:Ignorable="d"
         Title="NewNotesWindow" Height="750" Width="1280" Background="{x:Null}">
 
@@ -140,21 +140,13 @@
                     </Menu>
                 </Grid>
             </StackPanel>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,56,0,0" Height="39" Width="200">
-                <Rectangle Height="33" RadiusX="11" RadiusY="11" Fill="#FFFFFCE6" Margin="12,3,-24,3" Width="212"/>
-                <TextBlock HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" TextAlignment="Center" Foreground="#FFCD216F" FontSize="20" Margin="12,3,0,0"><Run Text="Your Notebooks"/><LineBreak/><Run/></TextBlock>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,56,0,0" Height="39" Width="200" d:IsLocked="True">
+                <Rectangle RadiusX="11" RadiusY="11" Fill="#FFFFFCE6" Margin="12,3,-32,0" Height="32"/>
+                <TextBlock HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" TextAlignment="Center" Foreground="#FFCD216F" FontSize="20" Margin="12,5,0,0"><Run Text="Your Notebooks:"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
             </Grid>
         </Grid>
         <Rectangle HorizontalAlignment="Left" Height="704" Margin="230,0,0,0" VerticalAlignment="Center" Width="250" RadiusX="30" RadiusY="30"/>
         <Grid HorizontalAlignment="Left" Height="704" Margin="234,0,0,0" VerticalAlignment="Center" Width="250">
-            <Border BorderThickness="3,3,3,3" Margin="10,93,10,208" CornerRadius="0,0,10,10">
-                <Border.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF39029A"/>
-                        <GradientStop Color="#FF1B86EA" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.BorderBrush>
-            </Border>
             <StackPanel x:Name="WeatherStackPanel" HorizontalAlignment="Center" Height="140" Margin="0,565,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
@@ -187,7 +179,7 @@
                 <ListView DockPanel.Dock="Left"
                   SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notes}"
-                  x:Name="ListViewNotes" Background="{x:Null}" BorderBrush="{x:Null}" Height="194">
+                  x:Name="ListViewNotes" Background="{x:Null}" BorderBrush="{x:Null}" Height="377">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -211,10 +203,18 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
+            <Border BorderThickness="0,0,3,3" Margin="-5,92,10,208" CornerRadius="0,0,10,0" Height="402">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF39029A"/>
+                        <GradientStop Color="#FF1B86EA" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
         </Grid>
         <StackPanel HorizontalAlignment="Left" Height="593" Margin="507,62,0,0" VerticalAlignment="Top" Width="750">
-            <Grid Height="82">
-                <ToolBarTray Panel.ZIndex="70" Background="{x:Null}" Margin="0,41,0,0">
+            <Grid Height="82" d:IsLocked="True">
+                <ToolBarTray Panel.ZIndex="70" Background="{x:Null}" Margin="0,24,0,18" Height="40">
                     <ToolBar Background="{x:Null}" Foreground="{x:Null}" Margin="0,0,0,-38" Width="483">
                         <Button x:Name="SpeechButton"
                             Content="Speech"
@@ -252,7 +252,7 @@
                             CommandParameter="{Binding SelectedNote}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     </ToolBar>
                 </ToolBarTray>
-                <Rectangle RadiusX="12.571" RadiusY="12.571" Margin="0,41,0,0">
+                <Rectangle RadiusX="12.571" RadiusY="12.571" Margin="0,24,0,18">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.8,0" StartPoint="0.5,0">
                             <GradientStop Color="#FF650C46" Offset="1"/>
@@ -261,8 +261,8 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Grid>
-            <Grid Height="494">
-                <Border BorderThickness="4,0,4,4" Margin="0,0,0,10" CornerRadius="20,20,20,20" FlowDirection="LeftToRight">
+            <Grid Height="494" d:IsLocked="True">
+                <Border BorderThickness="4,0,4,4" Margin="0,-17,0,-14" CornerRadius="10,10,50,50" FlowDirection="LeftToRight">
                     <Border.BorderBrush>
                         <LinearGradientBrush EndPoint="0,0.5" StartPoint="0.5,0">
                             <LinearGradientBrush.Transform>
@@ -278,17 +278,15 @@
                         </LinearGradientBrush>
                     </Border.BorderBrush>
                 </Border>
-                <toolkit:RichTextBox x:Name="contentRichTextBox"
+                <RichTextBox x:Name="contentRichTextBox"
                          TextChanged="contentRichTextBox_TextChanged"
-                         SelectionChanged="contentRichTextBox_SelectionChanged" Background="{x:Null}" BorderBrush="#FFFFFCE6" Margin="20,10,20,20" SelectionBrush="Black" SelectionTextBrush="Black" CaretBrush="#FF464646">
-                    <toolkit:RichTextBox.TextFormatter>
-                        <toolkit:RtfFormatter />
-                    </toolkit:RichTextBox.TextFormatter>
-                </toolkit:RichTextBox>
+                         SelectionChanged="contentRichTextBox_SelectionChanged" Background="{x:Null}" BorderBrush="{x:Null}" Margin="25,0,24,0">
+
+                </RichTextBox>
             </Grid>
         </StackPanel>
 
-        <Border BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="50" Margin="489,685,0,0" VerticalAlignment="Top" Width="791"  CornerRadius="0,10,10,10" Grid.ColumnSpan="2">
+        <Border BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="50" Margin="489,685,0,0" VerticalAlignment="Top" Width="791"  CornerRadius="0,10,10,10" Grid.ColumnSpan="2" d:IsLocked="True">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <LinearGradientBrush.RelativeTransform>
@@ -303,30 +301,8 @@
                     <GradientStop Color="#FF1B86EA" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-        </Border>
+            <Expander  Margin="304,4,26,4" ExpandDirection="Right"  >
 
-        <TextBlock x:Name="statusTextBlock" HorizontalAlignment="Left" Height="36" Margin="523,694,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Foreground="White" FontSize="16"/>
-        <Border HorizontalAlignment="Left" Height="52" Margin="244,72,0,0" VerticalAlignment="Top" Width="230"  CornerRadius="00,10,0,0">
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <LinearGradientBrush.RelativeTransform>
-                        <TransformGroup>
-                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                            <RotateTransform CenterY="0.5" CenterX="0.5" Angle="270"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </LinearGradientBrush.RelativeTransform>
-                    <GradientStop Color="#FF39039A"/>
-                    <GradientStop Color="#FF39049B" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <Button Content="New Note" HorizontalAlignment="Center" Height="52" VerticalAlignment="Center" Width="230" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFFCE6"
-                    Command="{Binding NewNoteCommand}"
-                    CommandParameter="{Binding SelectedNotebook}"/>
-        </Border>
-        <Expander  Margin="804,694,0,36" ExpandDirection="Right" Grid.ColumnSpan="2" >
-            <StackPanel >
                 <Grid Height="38" Width="438">
                     <TextBlock
                         Text="Last updated:"
@@ -347,8 +323,80 @@
                         FontSize="13"
                         Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" Margin="300,0,0,0"/>
                 </Grid>
-            </StackPanel>
-        </Expander>
+
+            </Expander>
+        </Border>
+
+        <TextBlock x:Name="statusTextBlock" HorizontalAlignment="Left" Height="36" Margin="523,694,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Foreground="White" FontSize="16"/>
+        <Border HorizontalAlignment="Left" Height="35" Margin="280,90,0,0" VerticalAlignment="Top" Width="194"  CornerRadius="00,10,0,0">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5" Angle="270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF39039A"/>
+                    <GradientStop Color="#FF39049B" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Button Content="Add a New Note" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="210" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFFCE6"
+                    Command="{Binding NewNoteCommand}"
+                    CommandParameter="{Binding SelectedNotebook}" FontSize="20"/>
+        </Border>
+        <Border HorizontalAlignment="Left" Height="35" Margin="28,527,0,0" VerticalAlignment="Top" Width="212"  CornerRadius="11,0,0,0" Background="#FFFFFCE6" BorderBrush="#FF5124C7" d:IsLocked="True">
+            <Button Content="New Notebook" HorizontalAlignment="Left" Height="32" VerticalAlignment="Center" Width="144" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA52142"
+                    Command="{Binding NewNotebookCommand}"
+                    FontSize="20" Margin="10,0,0,0"/>
+        </Border>
+        <Border x:Name="WeatherBorder" BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="187" Margin="244,544,0,0" VerticalAlignment="Top" Width="230"  CornerRadius="0,10,10,10">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5" Angle="270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF39029A"/>
+                    <GradientStop Color="#FF1B86EA" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="7,7,-3,7"
+                  >
+                <TextBlock DataContext="{StaticResource wvm}"
+                           Text="{Binding ChosenCity.LocalizedName}"
+                           FontSize="20"
+                           Foreground="White" Margin="0,10,62,115"/>
+                <TextBlock Text="{Binding Temperature.Metric.Value,StringFormat={}{0}°C}"
+                           FontSize="20"
+                           Foreground="White"
+                           Margin="158,10,10,115"/>
+                <TextBlock Text="{Binding WeatherText}"
+                           Foreground="White"
+                           FontSize="16" Margin="0,52,20,84" Cursor="Cross" SnapsToDevicePixels="True"/>
+                <Image 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Height="63" Width="74" Margin="3,100,0,0"/>
+                <Border BorderThickness="4,4,4,4" Margin="110,113,20,10" Width="90" Height="44" CornerRadius="10,10,10,10">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black"/>
+                            <GradientStop Color="#FF3417A7" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                </Border>
+                <Button Content="More" HorizontalAlignment="Left" Height="44" Margin="110,113,0,0" VerticalAlignment="Top" Width="90" 
+                        BorderBrush="{x:Null}" Foreground="White" FontSize="22" Background="{x:Null}"
+                        Command="{Binding OpenWeatherWindowCommand}"/>
+
+            </Grid>
+        </Border>
 
     </Grid>
 </Window>

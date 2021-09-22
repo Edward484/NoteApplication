@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="Weather" Height="700" Width="500">
     <Window.Resources>
-        <vm1:WeatherViewModel x:Key="vm"/>
+        <vm1:WeatherViewModel x:Key="wvm"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource vm}">
+    <Grid DataContext="{StaticResource wvm}">
         <Grid.ColumnDefinitions>
 
         </Grid.ColumnDefinitions>
@@ -61,7 +61,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock DataContext="{StaticResource vm}"
+                <TextBlock DataContext="{StaticResource wvm}"
                            Text="{Binding ChosenCity.LocalizedName}"
                            FontSize="50"
                            Foreground="White"

@@ -368,16 +368,16 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Grid Margin="7,7,-3,7"
-                  >
-                <TextBlock DataContext="{StaticResource wvm}"
-                           Text="{Binding ChosenCity.LocalizedName}"
+                  DataContext="{StaticResource wvm}">
+                <TextBlock 
+                           Text="{Binding ChosenCity.LocalizedName, Mode=TwoWay}"
                            FontSize="20"
                            Foreground="White" Margin="0,10,62,115"/>
-                <TextBlock Text="{Binding Temperature.Metric.Value,StringFormat={}{0}°C}"
+                <TextBlock Text="{Binding CurrentWeather.Temperature.Metric.Value,StringFormat={}{0}°C}"
                            FontSize="20"
                            Foreground="White"
                            Margin="158,10,10,115"/>
-                <TextBlock Text="{Binding WeatherText}"
+                <TextBlock Text="{Binding CurrentWeather.WeatherText}"
                            Foreground="White"
                            FontSize="16" Margin="0,52,20,84" Cursor="Cross" SnapsToDevicePixels="True"/>
                 <Image 
@@ -393,6 +393,7 @@
                 </Border>
                 <Button Content="More" HorizontalAlignment="Left" Height="44" Margin="110,113,0,0" VerticalAlignment="Top" Width="90" 
                         BorderBrush="{x:Null}" Foreground="White" FontSize="22" Background="{x:Null}"
+                        DataContext="{StaticResource vm}"
                         Command="{Binding OpenWeatherWindowCommand}"/>
 
             </Grid>

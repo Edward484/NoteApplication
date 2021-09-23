@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteApplication.View"
-        xmlns:vm1="clr-namespace:NotesApplication.ViewModel"
+        xmlns:vm1="clr-namespace:NotesApplication.ViewModel" xmlns:vm="clr-namespace:NoteApplication.ViewModel" 
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"       
         mc:Ignorable="d"
         Title="Weather" Height="700" Width="500">
     <Window.Resources>
         <vm1:WeatherViewModel x:Key="wvm"/>
+        <vm:NotesViewModel x:Key="vm"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource wvm}">
         <Grid.ColumnDefinitions>

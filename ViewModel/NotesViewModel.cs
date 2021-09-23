@@ -40,6 +40,9 @@ namespace NoteApplication.ViewModel
         public RenameEditCommandNotebook RenameEditCommandNotebook { get; set; }
         public RenameEndEditCommandNotebook RenameEndEditCommandNotebook { get; set; }
 
+        public SearchCommand SearchCommand { get; set; }
+        public OpenSearchCityCommand OpenSearchCityCommand { get; set; }
+
         public RenameEditCommandNote RenameEditCommandNote { get; set; }
         public DeleteCommandNote DeleteCommandNote { get;  set; }
         public DeleteCommandNotebook DeleteCommandNotebook { get; set; }
@@ -167,6 +170,47 @@ namespace NoteApplication.ViewModel
             set { lastUsedFontSize = value; }
         }
 
+        private string query;
+
+        public string Query
+        {
+            get { return query; }
+            set
+            {
+                query = value;
+                OnPropertyChanged("Query");
+            }
+        }
+
+        static private CurrentWeather currentWeatherN;
+
+        public CurrentWeather CurrentWeatherN
+        {
+            get { return currentWeatherN; }
+            set
+            {
+                currentWeatherN = value;
+                OnPropertyChanged("CurrentWeatherN");
+            }
+        }
+
+        private City chosenCityN;
+
+        public City ChosenCityN
+        {
+            get { return chosenCityN; }
+            set
+            {
+                chosenCityN = value;
+                if (chosenCityN != null)
+                {
+                    OnPropertyChanged("ChosenCityN");
+                }
+            }
+        }
+
+
+
 
 
 
@@ -193,6 +237,8 @@ namespace NoteApplication.ViewModel
             
             WeatherWindow = new();
 
+            ChosenCityN = new();
+            CurrentWeatherN = new();
 
             Notebooks = new();
             Notes = new();
@@ -200,6 +246,8 @@ namespace NoteApplication.ViewModel
             NoteRenameVisibility = Visibility.Collapsed;
             LastUsedFont = new("Calibri");
             LastUsedFontSize = 12;
+
+           
 
             GetNotebooksAsync();
 
@@ -225,6 +273,8 @@ namespace NoteApplication.ViewModel
                     Title = $"New note"
                 };
                 Notes.Add(newNote3);
+
+                
             }
             }
         public async void CreateNotebookAsync()
@@ -422,6 +472,8 @@ namespace NoteApplication.ViewModel
 
         }
 
-        
+     
+
+
     }
 }

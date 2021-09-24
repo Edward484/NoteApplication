@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+
+using Azure.Storage.Blobs;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using NoteApplication.Model;

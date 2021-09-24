@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using NoteApplication.Model;
-using NoteApplication.ViewModel;
 using NoteApplication.ViewModel.Commands;
 using NoteApplication.ViewModel.Helpers;
 
@@ -16,8 +15,6 @@ namespace NotesApplication.ViewModel
     public class WeatherViewModel : INotifyPropertyChanged
     {
         private string query;
-
-        NotesViewModel Nvm { get; set;}
 
         public  string Query
         {
@@ -37,8 +34,7 @@ namespace NotesApplication.ViewModel
         {
             get { return currentWeather; }
             set 
-            {
-                Nvm.CurrentWeatherN = currentWeather;
+            { 
                 currentWeather = value; 
                 OnPropertyChanged("CurrentWeather"); 
             }
@@ -54,8 +50,6 @@ namespace NotesApplication.ViewModel
                 chosenCity = value;
                 if (chosenCity != null)
                 {
-                    Nvm.ChosenCityN = new();
-                    Nvm.ChosenCityN = ChosenCity;
                     OnPropertyChanged("ChosenCity");
                     SearchCityEnd();
                     GetCurrentWeather();

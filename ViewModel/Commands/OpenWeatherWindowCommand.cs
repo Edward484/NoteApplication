@@ -31,7 +31,6 @@ namespace NoteApplication.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            
             VM.OpenWeatherWindow();
         }
     }

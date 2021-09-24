@@ -96,8 +96,8 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle HorizontalAlignment="Left" Height="737" Margin="229,0,0,0" VerticalAlignment="Center" Width="1051" Fill="#FFFFFCE6" RadiusY="30" RadiusX="30" Grid.ColumnSpan="2"/>
-        <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="234">
-            <StackPanel HorizontalAlignment="Left" Height="391" Margin="0,100,0,0" VerticalAlignment="Top" Width="287">
+        <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="224">
+            <StackPanel HorizontalAlignment="Left" Height="391" Margin="0,100,0,0" VerticalAlignment="Top" Width="269">
                 <ListView 
                       ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
                       Background="{x:Null}"
@@ -176,12 +176,10 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </StackPanel.RenderTransform>
-                <ListView 
-                     ItemContainerStyle="{DynamicResource _NotesListBoxItemStyle}"
-                     DockPanel.Dock="Left"
-                     SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     ItemsSource="{Binding Notes}"
-                     x:Name="ListViewNotes" Background="{x:Null}" BorderBrush="{x:Null}" Height="377">
+                <ListView DockPanel.Dock="Left"
+                  SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Notes}"
+                  x:Name="ListViewNotes" Background="{x:Null}" BorderBrush="{x:Null}" Height="377">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -208,11 +206,8 @@
             <Border BorderThickness="0,0,3,3" Margin="-5,92,10,208" CornerRadius="0,0,10,0" Height="402">
                 <Border.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFEC383E"/>
-                        <GradientStop Color="#FF8D1944" Offset="1"/>
-                        <GradientStop Color="#FF2949C5" Offset="0.256"/>
-                        <GradientStop Color="#FF3516A6" Offset="0.785"/>
-                        <GradientStop Color="#FFEE2A78" Offset="0.491"/>
+                        <GradientStop Color="#FF39029A"/>
+                        <GradientStop Color="#FF1B86EA" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
             </Border>
@@ -291,7 +286,7 @@
             </Grid>
         </StackPanel>
 
-        <Border BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="50" Margin="489,685,0,0" VerticalAlignment="Top" Width="791"  CornerRadius="0,10,10,10" Grid.ColumnSpan="2">
+        <Border BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="50" Margin="489,685,0,0" VerticalAlignment="Top" Width="791"  CornerRadius="0,10,10,10" Grid.ColumnSpan="2" d:IsLocked="True">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <LinearGradientBrush.RelativeTransform>
@@ -344,18 +339,18 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </LinearGradientBrush.RelativeTransform>
-                    <GradientStop Color="#FFFB3D3D"/>
-                    <GradientStop Color="#FFEC383E" Offset="1"/>
+                    <GradientStop Color="#FF39039A"/>
+                    <GradientStop Color="#FF39049B" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Button Content="Add a New Note" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="210" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFFCE6"
                     Command="{Binding NewNoteCommand}"
                     CommandParameter="{Binding SelectedNotebook}" FontSize="20"/>
         </Border>
-        <Border HorizontalAlignment="Left" Height="35" Margin="28,527,0,0" VerticalAlignment="Top" Width="180"  CornerRadius="11,0,11,0" Background="#FFFFFCE6" BorderBrush="#FF5124C7">
-            <Button Content="New Notebook" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="144" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA52142"
+        <Border HorizontalAlignment="Left" Height="35" Margin="28,527,0,0" VerticalAlignment="Top" Width="212"  CornerRadius="11,0,0,0" Background="#FFFFFCE6" BorderBrush="#FF5124C7" d:IsLocked="True">
+            <Button Content="New Notebook" HorizontalAlignment="Left" Height="32" VerticalAlignment="Center" Width="144" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA52142"
                     Command="{Binding NewNotebookCommand}"
-                    FontSize="20"/>
+                    FontSize="20" Margin="10,0,0,0"/>
         </Border>
         <Border x:Name="WeatherBorder" BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="187" Margin="244,544,0,0" VerticalAlignment="Top" Width="230"  CornerRadius="0,10,10,10">
             <Border.Background>
@@ -372,16 +367,17 @@
                     <GradientStop Color="#FF1B86EA" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Grid Margin="7,7,-3,7">
+            <Grid Margin="7,7,-3,7"
+                  DataContext="{StaticResource wvm}">
                 <TextBlock 
-                           Text="{Binding ChosenCityN.LocalizedName, Mode=TwoWay}"
+                           Text="{Binding ChosenCity.LocalizedName, Mode=TwoWay}"
                            FontSize="20"
                            Foreground="White" Margin="0,10,62,115"/>
-                <TextBlock Text="{Binding CurrentWeatherN.Temperature.Metric.Value,StringFormat={}{0}°C}"
+                <TextBlock Text="{Binding CurrentWeather.Temperature.Metric.Value,StringFormat={}{0}°C}"
                            FontSize="20"
                            Foreground="White"
                            Margin="158,10,10,115"/>
-                <TextBlock Text="{Binding CurrentWeatherN.WeatherText}"
+                <TextBlock Text="{Binding CurrentWeather.WeatherText}"
                            Foreground="White"
                            FontSize="16" Margin="0,52,20,84" Cursor="Cross" SnapsToDevicePixels="True"/>
                 <Image 

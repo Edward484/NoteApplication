@@ -5,6 +5,22 @@
              xmlns:uc="clr-namespace:NoteApplication.View.UserControls"
              StartupUri="View/NewNotesWindow.xaml">
     <Application.Resources>
+
+        <Style x:Key="calculatorHoverIcon" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="blue" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Template">
                 <Setter.Value>

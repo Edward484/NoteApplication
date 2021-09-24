@@ -413,7 +413,7 @@ namespace NoteApplication.ViewModel
 
         internal void OpenWeatherWindow()
         {
-            WeatherWindow.ShowDialog();
+            WeatherWindow.ShowDialog(); 
         }
 
         private void OnPropertyChanged(string propertyName)

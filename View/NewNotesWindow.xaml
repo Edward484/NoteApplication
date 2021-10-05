@@ -83,10 +83,7 @@
             <ColumnDefinition Width="1259*"/>
             <ColumnDefinition Width="21*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle HorizontalAlignment="Left" Height="67" Margin="200,685,0,0" VerticalAlignment="Top" Width="59" Fill="#FFFFFCE6" RenderTransformOrigin="0.466,1.389"/>
-
-        <Rectangle HorizontalAlignment="Left" Height="52" Margin="200,15,0,0" VerticalAlignment="Top" Width="59" Fill="#FFFFFCE6"/>
-
+        <Rectangle HorizontalAlignment="Left" Height="737" Margin="168,0,0,0" VerticalAlignment="Center" Width="1112" Fill="#FFFFFCE6" RadiusY="30" RadiusX="30" Grid.ColumnSpan="2"/>
         <Rectangle HorizontalAlignment="Left" Height="737" VerticalAlignment="Center" Width="229" RadiusX="30" RadiusY="30">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -95,11 +92,10 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle HorizontalAlignment="Left" Height="737" Margin="229,0,0,0" VerticalAlignment="Center" Width="1051" Fill="#FFFFFCE6" RadiusY="30" RadiusX="30" Grid.ColumnSpan="2"/>
         <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="234">
             <StackPanel HorizontalAlignment="Left" Height="391" Margin="0,100,0,0" VerticalAlignment="Top" Width="287">
                 <ListView 
-                      ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
+                      ItemContainerStyle="{DynamicResource _ListBoxItemStyleNotebooks}"
                       Background="{x:Null}"
                       Width="220"
                       SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -177,6 +173,7 @@
                     </TransformGroup>
                 </StackPanel.RenderTransform>
                 <ListView DockPanel.Dock="Left"
+                  ItemContainerStyle="{DynamicResource _ListBoxItemStyleNotes}"
                   SelectedValue="{Binding SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notes}"
                   x:Name="ListViewNotes" Background="{x:Null}" BorderBrush="{x:Null}" Height="377">
@@ -206,8 +203,11 @@
             <Border BorderThickness="0,0,3,3" Margin="-5,92,10,208" CornerRadius="0,0,10,0" Height="402">
                 <Border.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF39029A"/>
-                        <GradientStop Color="#FF1B86EA" Offset="1"/>
+                        <GradientStop Color="#FFEC383E"/>
+                        <GradientStop Color="#FF8D1944" Offset="1"/>
+                        <GradientStop Color="#FF2949C5" Offset="0.256"/>
+                        <GradientStop Color="#FF3516A6" Offset="0.785"/>
+                        <GradientStop Color="#FFEE2A78" Offset="0.491"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
             </Border>
@@ -319,7 +319,7 @@
                         FontSize="13"
                         Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" Margin="229,0,143,3"/>
                     <TextBlock Text="{Binding SelectedNote.CreatedTime}"
-                        Foreground="DodgerBlue"
+                        Foreground="White"
                         FontSize="13"
                         Visibility="{Binding NoteCreatedVisibility, Source={StaticResource vm}}" Margin="300,0,0,0"/>
                 </Grid>
@@ -340,12 +340,12 @@
                         </TransformGroup>
                     </LinearGradientBrush.RelativeTransform>
                     <GradientStop Color="#FF39039A"/>
-                    <GradientStop Color="#FF39049B" Offset="1"/>
+                    <GradientStop Color="#FFE53943" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Button Content="Add a New Note" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="210" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFFCE6"
+            <Button Content="Add a New Note" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="210" Foreground="#FFFFFCE6"
                     Command="{Binding NewNoteCommand}"
-                    CommandParameter="{Binding SelectedNotebook}" FontSize="20"/>
+                    CommandParameter="{Binding SelectedNotebook}" FontSize="20" BorderBrush="{x:Null}" Background="{x:Null}"/>
         </Border>
         <Border HorizontalAlignment="Left" Height="35" Margin="28,527,0,0" VerticalAlignment="Top" Width="180"  CornerRadius="11,0,11,0" Background="#FFFFFCE6" BorderBrush="#FF5124C7" d:IsLocked="True">
             <Button Content="New Notebook" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="144" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA52142"
@@ -397,9 +397,31 @@
 
             </Grid>
         </Border>
-        <Grid HorizontalAlignment="Left" Height="278" Margin="479,180,0,0" VerticalAlignment="Top" Width="23">
-            <Button Content="" Margin="-3,20,-5,230" Height="30" Width="30" BorderBrush="{x:Null}"
-                    Style="{StaticResource calculatorHoverIcon}" Foreground="{x:Null}" Background="#FF953D3D"/>
+        <Grid HorizontalAlignment="Left" Height="319" Margin="474,139,0,0" VerticalAlignment="Top" Width="33">
+            <Border BorderThickness="1" Margin="-1,44,5,235" CornerRadius="0,15,5,0" Width="29">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF804189"/>
+                        <GradientStop Color="#FF2A49C4" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Button 
+                Command="{Binding OpenCalculatorWindowCommand}"
+                Content="C" HorizontalAlignment="Left" Height="27" VerticalAlignment="Center" Width="26" Margin="-1,0,0,0" FontSize="15" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/View/icons8-calculator-50.ico"/>
+                    </Button.Background>
+                </Button>
+            </Border>
+            <Rectangle HorizontalAlignment="Center" Height="15" Margin="0,10,0,0" VerticalAlignment="Top" Width="43">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0.5,0.5">
+                        <GradientStop Color="#FFB03D68"/>
+                        <GradientStop Color="#FFC62C40" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <TextBlock HorizontalAlignment="Left" Height="14" Margin="3,9,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Width="38"><Run Text="Tools"/><LineBreak/><Run/></TextBlock>
         </Grid>
 
     </Grid>

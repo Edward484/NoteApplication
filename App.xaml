@@ -21,12 +21,12 @@
             </Setter>
         </Style>
 
-        <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
+        <Style x:Key="_ListBoxItemStyleNotebooks" TargetType="ListBoxItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border Name="_Border"
-                                Padding="2"
+                                Padding="3"
                                 SnapsToDevicePixels="true">
                             <ContentPresenter />
                         </Border>
@@ -42,7 +42,28 @@
             </Setter>
         </Style>
 
-        
+        <Style x:Key="_ListBoxItemStyleNotes" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="_Border"
+                                Padding="3"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="BorderBrush" Value="#FFFB3D3D" />
+                                <Setter TargetName="_Border" Property="CornerRadius" Value="10,10,10,10" />
+                                <Setter TargetName="_Border" Property="BorderThickness" Value="4,0,0,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
 
 
         <Style x:Key="MyWaterMarkStyle" TargetType="{x:Type TextBox}">

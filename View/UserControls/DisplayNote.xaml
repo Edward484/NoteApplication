@@ -19,9 +19,9 @@
                    FontWeight="bold"
                    VerticalAlignment="Top"
                    Visibility="{Binding NoteNameVisibility, Source={StaticResource vm}}"/>
-        
-        
-        
+
+
+
 
         <TextBox x:Name="RenameNoteTextBox"
                  Text="{Binding Title, Mode=TwoWay}"

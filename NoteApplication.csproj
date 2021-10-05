@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="View\icons8-calculator-50.ico" />
     <None Remove="View\icons8_book_96_EDe_icon.ico" />
   </ItemGroup>
 
@@ -28,6 +29,10 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\icons8-calculator-50.ico" />
   </ItemGroup>
 
 </Project>

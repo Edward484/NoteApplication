@@ -96,14 +96,14 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle HorizontalAlignment="Left" Height="737" Margin="229,0,0,0" VerticalAlignment="Center" Width="1051" Fill="#FFFFFCE6" RadiusY="30" RadiusX="30" Grid.ColumnSpan="2"/>
-        <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="224">
-            <StackPanel HorizontalAlignment="Left" Height="391" Margin="0,100,0,0" VerticalAlignment="Top" Width="269">
+        <Grid HorizontalAlignment="Left" Height="704" VerticalAlignment="Center" Width="234">
+            <StackPanel HorizontalAlignment="Left" Height="391" Margin="0,100,0,0" VerticalAlignment="Top" Width="287">
                 <ListView 
                       ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
                       Background="{x:Null}"
                       Width="220"
                       SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding Notebooks}" Height="390" BorderBrush="{x:Null}">
+                      ItemsSource="{Binding Notebooks}" Height="410" BorderBrush="{x:Null}">
 
                     <ListView.ItemTemplate >
                         <DataTemplate>
@@ -130,7 +130,7 @@
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="116" Margin="10,588,0,0" VerticalAlignment="Top" Width="205">
                 <Grid Height="100">
-                    <Menu Background="{x:Null}" Margin="72,0,30,0">
+                    <Menu Background="{x:Null}" Margin="72,0,30,0" d:IsLocked="True">
                         <MenuItem Height="46" Width="102" Foreground="#FFFFFCE6"
                             Header="Log out"
                             Command="{Binding LogOutCommand}"/>
@@ -140,12 +140,12 @@
                     </Menu>
                 </Grid>
             </StackPanel>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,56,0,0" Height="39" Width="200" d:IsLocked="True">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="39" Width="200" Margin="0,10,0,0" d:IsLocked="True">
                 <Rectangle RadiusX="11" RadiusY="11" Fill="#FFFFFCE6" Margin="12,3,-32,0" Height="32"/>
                 <TextBlock HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" TextAlignment="Center" Foreground="#FFCD216F" FontSize="20" Margin="12,5,0,0"><Run Text="Your Notebooks:"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
             </Grid>
         </Grid>
-        <Rectangle HorizontalAlignment="Left" Height="704" Margin="230,0,0,0" VerticalAlignment="Center" Width="250" RadiusX="30" RadiusY="30"/>
+        <Rectangle HorizontalAlignment="Left" Height="704" Margin="230,0,0,0" VerticalAlignment="Center" Width="244" RadiusX="30" RadiusY="30"/>
         <Grid HorizontalAlignment="Left" Height="704" Margin="234,0,0,0" VerticalAlignment="Center" Width="250">
             <StackPanel x:Name="WeatherStackPanel" HorizontalAlignment="Center" Height="140" Margin="0,565,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
                 <StackPanel.RenderTransform>
@@ -327,7 +327,7 @@
             </Expander>
         </Border>
 
-        <TextBlock x:Name="statusTextBlock" HorizontalAlignment="Left" Height="36" Margin="523,694,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Foreground="White" FontSize="16"/>
+        <TextBlock x:Name="statusTextBlock" HorizontalAlignment="Left" Height="36" Margin="523,694,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Foreground="White" FontSize="16" d:IsLocked="True"/>
         <Border HorizontalAlignment="Left" Height="35" Margin="280,90,0,0" VerticalAlignment="Top" Width="194"  CornerRadius="00,10,0,0">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -347,8 +347,8 @@
                     Command="{Binding NewNoteCommand}"
                     CommandParameter="{Binding SelectedNotebook}" FontSize="20"/>
         </Border>
-        <Border HorizontalAlignment="Left" Height="35" Margin="28,527,0,0" VerticalAlignment="Top" Width="212"  CornerRadius="11,0,0,0" Background="#FFFFFCE6" BorderBrush="#FF5124C7" d:IsLocked="True">
-            <Button Content="New Notebook" HorizontalAlignment="Left" Height="32" VerticalAlignment="Center" Width="144" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA52142"
+        <Border HorizontalAlignment="Left" Height="35" Margin="28,527,0,0" VerticalAlignment="Top" Width="180"  CornerRadius="11,0,11,0" Background="#FFFFFCE6" BorderBrush="#FF5124C7" d:IsLocked="True">
+            <Button Content="New Notebook" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="144" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA52142"
                     Command="{Binding NewNotebookCommand}"
                     FontSize="20" Margin="10,0,0,0"/>
         </Border>
@@ -397,6 +397,10 @@
 
             </Grid>
         </Border>
+        <Grid HorizontalAlignment="Left" Height="278" Margin="479,180,0,0" VerticalAlignment="Top" Width="23">
+            <Button Content="" Margin="-3,20,-5,230" Height="30" Width="30" BorderBrush="{x:Null}"
+                    Style="{StaticResource calculatorHoverIcon}" Foreground="{x:Null}" Background="#FF953D3D"/>
+        </Grid>
 
     </Grid>
 </Window>
